@@ -1,0 +1,53 @@
+<div class="col-md-12 pt-3">
+  <div
+    class=" kt-container kt-grid__item kt-grid__item--fluid kt-container--fluid"
+  >
+    <h2>Tendencias de Sentimiento</h2>
+  </div>
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="row row-full-height">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+            <google-chart
+              [data]="averageSentiment"
+              [type]="'ScatterChart'"
+              [options]="options"
+              [title]="'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'"
+              [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
+              [width]="500"
+            ></google-chart>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 kt-portlet p-3 kt-portlet--border-bottom-brand">
+          <div class="row ">
+            <div class="p-3 ">
+              <google-chart
+                [data]="averageSentiment"
+                [type]="'Table'"
+                [options]="options"
+                [title]="'¿Qué entidades mencionadas en los comentarios tienen el puntaje de sentimiento promedio más alto?'"
+                [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
+                [width]="500"
+              ></google-chart>
+            </div>
+          </div>
+          <div class="row">
+            <div class="p-3 ">
+              <google-chart
+                [data]="averageSentiment"
+                [type]="'Table'"
+                [options]="options"
+                [title]="
+                  '¿Qué entidades mencionadas en los comentarios tienen el puntaje de sentimiento promedio más bajo?'
+                "
+                [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
+                [width]="500"
+              ></google-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

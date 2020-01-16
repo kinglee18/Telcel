@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CustomMaterialModule } from "./material.module";
 import { CustomerCareService } from "./customer-care.service";
 import { of } from "rxjs";
+import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 
 export class CustomerCareServiceStub {
   getCenters() {
@@ -30,7 +31,9 @@ describe("AppComponent", () => {
         CustomMaterialModule,
         GoogleChartsModule.forRoot(),
         NgxMatSelectSearchModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        SatDatepickerModule,
+        SatNativeDateModule
       ],
       providers: [
         {

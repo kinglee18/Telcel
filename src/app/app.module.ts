@@ -13,6 +13,7 @@ import { EntitiesSentimentComponent } from './entities-sentiment/entities-sentim
 import { ComentsComponent } from './coments/coments.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     BrowserAnimationsModule,
     CustomMaterialModule,
     ReactiveFormsModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    SatDatepickerModule,
+    SatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,64 +4,45 @@ import { ReplaySubject, Subject } from "rxjs";
 import { MatSelect } from "@angular/material";
 import { take, takeUntil } from "rxjs/operators";
 import { CustomerCareService } from "./customer-care.service";
-export interface Branch {
-  id: string;
-  name: string;
-}
-export const BRANCHES: Branch[] = [
-  { name: "Branch A (Switzerland)", id: "A" },
-  { name: "Branch B (Switzerland)", id: "B" },
-  { name: "Branch C (France)", id: "C" },
-  { name: "Branch D (France)", id: "D" },
-  { name: "Branch E (France)", id: "E" }
-];
+import { Branch } from "./branch";
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  protected branches: Branch[] = BRANCHES;
-
-  /** control for the selected branch for multi-selection */
+  constructor(private customerService: CustomerCareService) {}
+  protected branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
-
-  /** control for the MatSelect filter keyword multi-selection */
+  public dateRange: FormControl = new FormControl();
   public branchMultiFilterCtrl: FormControl = new FormControl();
-
-  /** list of branches filtered by search keyword */
   public filteredBranchesMulti: ReplaySubject<Branch[]> = new ReplaySubject<
     Branch[]
   >(1);
-
+  protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
 
-  /** Subject that emits when the component has been destroyed. */
-  protected _onDestroy = new Subject<void>();
-
-  constructor(private customerService: CustomerCareService) {}
-
   ngOnInit() {
-    this.customerService.getCenters().subscribe(data => {
-      console.log(data);
+    this.customerService.getCenters().subscribe((centers: Array<any>) => {
+      console.log(centersy);
+      
+      this.filteredBranchesMulti.next(centers.slice());
     });
-    this.branchMultiCtrl.setValue([
-      this.branches[10],
-      this.branches[11],
-      this.branches[12]
-    ]);
-
-    this.filteredBranchesMulti.next(this.branches.slice());
 
     this.branchMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterBranchesMulti();
       });
-  }
-
-  ngAfterViewInit() {
-    this.setInitialValue();
+    this.branchMultiCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(data => {
+        this.customerService.selectBranches(data);
+      });
+    this.dateRange.valueChanges.subscribe(date => {
+      this.customerService.setDateRange(date);
+    });
   }
 
   ngOnDestroy() {
@@ -81,23 +62,10 @@ export class AppComponent {
       });
   }
 
-  /**
-   * Sets the initial value after the filteredBranches are loaded initially
-   */
-  protected setInitialValue() {
-    this.filteredBranchesMulti
-      .pipe(take(1), takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.multiSelect.compareWith = (a: Branch, b: Branch) =>
-          a && b && a.id === b.id;
-      });
-  }
-
   protected filterBranchesMulti() {
     if (!this.branches) {
       return;
     }
-    // get the search keyword
     let search = this.branchMultiFilterCtrl.value;
     if (!search) {
       this.filteredBranchesMulti.next(this.branches.slice());
@@ -105,7 +73,6 @@ export class AppComponent {
     } else {
       search = search.toLowerCase();
     }
-    // filter the branches
     this.filteredBranchesMulti.next(
       this.branches.filter(
         branch => branch.name.toLowerCase().indexOf(search) > -1

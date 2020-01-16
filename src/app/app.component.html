@@ -129,7 +129,7 @@
         >
           <div class="kt-header__brand-logo" id="logo"></div>
         </div>
-        <h3 class="kt-header__title kt-grid__item">
+        <h3 class="kt-header__title kt-grid__item w-50">
           Comentarios CAC Telcel | Sentiment Analysis | Machine Learning [ ADN
           Sección Amarilla ]
         </h3>
@@ -140,7 +140,7 @@
           style="opacity: 1;"
         >
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <mat-form-field color="accent" class="mt-3">
                 <mat-select
                   [formControl]="branchMultiCtrl"
@@ -149,12 +149,17 @@
                   id="cac-select"
                   #multiSelect
                   multiple
+                  [disabled]="!branches.length"
                 >
                   <mat-select-trigger>
-                    {{ branchMultiCtrl.value && branchMultiCtrl.value.length == 1 && branchMultiCtrl.value[0]  ? branchMultiCtrl.value[0].name : "" }}
-                    <span
-                      *ngIf="branchMultiCtrl.value?.length > 1"
-                    >
+                    {{
+                      branchMultiCtrl.value &&
+                      branchMultiCtrl.value.length == 1 &&
+                      branchMultiCtrl.value[0]
+                        ? branchMultiCtrl.value[0].name
+                        : ""
+                    }}
+                    <span *ngIf="branchMultiCtrl.value?.length > 1">
                       {{ branchMultiCtrl.value?.length }} seleccionados
                     </span>
                   </mat-select-trigger>
@@ -172,6 +177,21 @@
                     {{ branch.name }}
                   </mat-option>
                 </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field class="mt-3">
+                <input
+                  matInput
+                  placeholder="Rango de fechas"
+                  [formControl]="dateRange"
+                  [satDatepicker]="picker2"
+                />
+                <sat-datepicker #picker2 [rangeMode]="true"> </sat-datepicker>
+                <sat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></sat-datepicker-toggle>
               </mat-form-field>
             </div>
           </div>

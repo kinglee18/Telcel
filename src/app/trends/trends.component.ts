@@ -26,12 +26,8 @@ export class TrendsComponent extends GeneralBoard implements Board {
   table1Columns: string[] = ["Entidad", "Puntuación"];
   lowerAverage = [
     [2, 4, 5],
-    [2, 4, 5],
-    [2, 4, 5],
-    [2, 4, 5],
-    [2, 4, 5],
-    [2, 4, 5],
-    [2, 4, 5]
+    [2, 4, 1],
+    [2, 4, 0]
   ];
   formatter = [];
   constructor(
@@ -46,12 +42,12 @@ export class TrendsComponent extends GeneralBoard implements Board {
     this.loaderService.onReady.subscribe(() => {
       this.loaderService
         .loadChartPackages([
-          GoogleChartPackagesHelper.getPackageForChartName('BarChart')
+          GoogleChartPackagesHelper.getPackageForChartName("Table")
         ])
         .subscribe(() => {
           this.formatter.push({
-            formatter: new google.visualization.BarFormat({ width: 120 }),
-            colIndex: 1
+            formatter: new google.visualization.BarFormat({ width: 120,  showValue: false }),
+            colIndex: 2
           });
         });
     });

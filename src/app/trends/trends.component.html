@@ -17,7 +17,7 @@
               [title]="
                 'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'
               "
-              [columnNames]="['Entidad', 'Calificación','e']"
+              [columnNames]="['Entidad', 'Calificación']"
               [width]="500"
             ></google-chart>
           </div>
@@ -25,7 +25,7 @@
         <div
           class="col-sm-12 col-md-12 col-lg-6 kt-portlet p-3 kt-portlet--border-bottom-brand"
         >
-        <!--   <div class="row ">
+           <!-- <div class="row ">
             <div class="p-3 ">
               <h6>
                 ¿Qué entidades mencionadas en los comentarios tienen el puntaje
@@ -64,15 +64,15 @@
                 ></tr>
               </table>
             </div>
-          </div> -->
-       <!--    <div class="row">
+          </div> --> 
+           <div class="row">
             <div class="p-3 ">
               <h6>
                 ¿Qué entidades mencionadas en los comentarios tienen el puntaje
                 de sentimiento promedio más bajo?
               </h6>
               <google-chart
-                [data]="averageSentiment"
+                [data]="lowerAverage"
                 [type]="'Table'"
                 [columnNames]="[
                   'Entidad',
@@ -80,9 +80,11 @@
                   'Número de menciones'
                 ]"
                 [width]="500"
+                [options]= "{page: 'enable', pageSize: 2}"
+                [formatter] = "formatter"
               ></google-chart>
             </div>
-          </div> -->
+          </div> 
         </div>
       </div>
     </div>

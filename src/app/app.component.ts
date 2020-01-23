@@ -38,7 +38,7 @@ export class AppComponent {
       });
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
-      this.customerService.getCenters().subscribe((centers: Array<any>) => {
+      this.customerService.getCenters(date).then((centers: Array<any>) => {
         this.branches = centers;
         this.filteredBranchesMulti.next(centers.slice());
         this.branchMultiCtrl.setValue(centers.slice());

@@ -1,3 +1,3 @@
 export interface Board {
-    showBoardInfo();
+    showBoardInfo(centers, date);
 }

@@ -1,54 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { CommentsService } from "../comments.service";
+import { CustomerCareService } from "../customer-care.service";
+import { GeneralBoard } from "../general-board";
+import { Board } from "../board";
 
 @Component({
-  selector: 'app-activity',
-  templateUrl: './activity.component.html',
-  styleUrls: ['./activity.component.scss']
+  selector: "app-activity",
+  templateUrl: "./activity.component.html",
+  styleUrls: ["./activity.component.scss"]
 })
-export class ActivityComponent implements OnInit {
-  languages = [
-    ["Español", 900],
-    ["Otros", 100]
-  ];
-  monthlyReviews = [
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["nov 2018", 8136000],
-    ["dic 2020", 8538000],
-    ["Feb 2019", 2244000],
-    ["may 2020", 19500000]
-  ];
+export class ActivityComponent extends GeneralBoard implements Board {
+  monthlyReviews: Array<object> = [];
+  languages: Array<object> = [];
+  otherLanguages: Array<object> = [];
 
-  otherLanguages = [
-    ['Ingles', 50],
-    ['Japones', 10]
-  ];
-  options = {
-    bar: {groupWidth: "35%" }
-  };
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private commentsService: CommentsService,
+    customerService: CustomerCareService
+  ) {
+    super(customerService);
   }
 
+  showBoardInfo(centers, date) {
+    this.request = this.commentsService.getMonthlyLanguageComments(centers, date).subscribe(data => {
+      this.monthlyReviews = data["monthly_comments"];
+      this.otherLanguages = data["other_languages"];
+      this.languages = data["languages"];
+    });
+  }
 }

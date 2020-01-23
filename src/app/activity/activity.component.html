@@ -13,9 +13,9 @@
             <google-chart
               [data]="monthlyReviews"
               [type]="'ColumnChart'"
-              [options]="options"
+              [options]="{'bar': { 'groupWidth': '30%' },'legend': { 'position': 'none' }}"
               [title]="'¿Cuántas reseñas se reciben mensualmente?'"
-              [columnNames]="['Year', 'Asia']"
+              [columnNames]="['Fecha', 'Comentarios']"
               [width]="1000"
               [height]="250"
             ></google-chart>
@@ -33,7 +33,7 @@
             <google-chart
               [data]="languages"
               [type]="'PieChart'"
-              [columnNames] = "['Browser', 'Percentage']"
+              [columnNames]="['Browser', 'Percentage']"
               [title]="
                 '¿Qué idioma se usa en la sección de comentarios del formulario?'
               "
@@ -42,19 +42,19 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
-              <h5>Idiomas</h5>
-              <google-chart
-                [data]="otherLanguages"
-                [type]="'BarChart'"
-                [options]="options"
-                [title]="
-                  '¿Qué idioma se usa en la sección de comentarios del formulario?'
-                "
-                [width]="450"
-              ></google-chart>
-            </div>
+          <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+            <h5>Idiomas</h5>
+            <google-chart
+              [data]="otherLanguages"
+              [type]="'BarChart'"
+              [options]="{'legend': { 'position': 'none' }}"
+              [title]="
+                '¿Qué idioma se usa en la sección de comentarios del formulario?'
+              "
+              [width]="450"
+            ></google-chart>
           </div>
+        </div>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import { MatSelect } from "@angular/material";
 import { take, takeUntil } from "rxjs/operators";
 import { CustomerCareService } from "./customer-care.service";
 import { Branch } from "./branch";
+import * as moment from 'moment';
 
 @Component({
   selector: "app-root",
@@ -24,17 +25,12 @@ export class AppComponent {
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
 
   ngOnInit() {
-    this.customerService.getCenters().subscribe((centers: Array<any>) => {
-      console.log(centersy);
-      
-      this.filteredBranchesMulti.next(centers.slice());
-    });
-
     this.branchMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterBranchesMulti();
       });
+
     this.branchMultiCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(data => {
@@ -42,8 +38,20 @@ export class AppComponent {
       });
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
+      this.customerService.getCenters().subscribe((centers: Array<any>) => {
+        this.branches = centers;
+        this.filteredBranchesMulti.next(centers.slice());
+        this.branchMultiCtrl.setValue(centers.slice());
+      });
+    });
+    this.dateRange.setValue({
+      begin: moment().subtract(30, 'd').toISOString(),
+      end:  moment().toISOString()
     });
   }
+
+
+
 
   ngOnDestroy() {
     this._onDestroy.next();

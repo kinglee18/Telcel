@@ -1,33 +1,32 @@
 import { Component, OnInit } from "@angular/core";
 import { CustomerCareService } from "../customer-care.service";
 import { Subscription } from "rxjs";
+import { GeneralBoard } from "../general-board";
+import { Board } from "../board";
 
 @Component({
   selector: "app-trends",
   templateUrl: "./trends.component.html",
   styleUrls: ["./trends.component.scss"]
 })
-export class TrendsComponent implements OnInit {
+export class TrendsComponent extends GeneralBoard implements Board {
   averageSentiment = [
-    [8, 12, 9],
-    [4, 5.5, 9],
-    [11, 14, 9],
-    [4, 5, 9],
-    [3, 3.5, 9],
-    [6.5, 7, 9]
+    [ 8,      12, -1]
   ];
   options = {
-    series: {
-      0: { axis: "hours studied" },
-      1: { axis: "final grade" }
-    }
+    hAxis: { title: "Número de menciones" },
+    vAxis: { title: "Puntaje de sentimiento" },
+    tooltip: { isHtml: true },
+    focusTarget: 'category'
   };
-  subscription: Subscription;
-  constructor(private customerService: CustomerCareService) {
-    this.subscription = customerService.branchesChanged$.subscribe(mission => {
-      console.log(mission);
-    });
+
+  table1Columns: string[] = ["Entidad", "Puntuación"];
+  lowerAverage = [
+    { entity: "entidad 1", score: 33, mentions: 9 }
+  ];
+  constructor(customerService: CustomerCareService) {
+    super(customerService);
   }
 
-  ngOnInit() {}
+  showBoardInfo() {}
 }

@@ -14,6 +14,7 @@ import { ComentsComponent } from './coments/coments.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
     ReactiveFormsModule,
     NgxMatSelectSearchModule,
     SatDatepickerModule,
-    SatNativeDateModule
+    SatNativeDateModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

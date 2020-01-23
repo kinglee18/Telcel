@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CustomMaterialModule } from "./material.module";
 import { CustomerCareService } from "./customer-care.service";
 import { of } from "rxjs";
-import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 
 export class CustomerCareServiceStub {
   getCenters() {
@@ -20,6 +20,8 @@ export class CustomerCareServiceStub {
       { name: "tlalpan", id: 4 }
     ]);
   }
+  setDateRange() {}
+  selectBranches() {}
 }
 
 describe("AppComponent", () => {
@@ -59,9 +61,11 @@ describe("AppComponent", () => {
     );
     component.click();
     fixture.detectChanges();
-    expect(
-      document.querySelector("#cdk-overlay-0").children[0].children[0].children
-        .length
-    ).toEqual(6);
+    fixture.whenStable().then(() => {
+      expect(
+        document.querySelector("#cdk-overlay-0").children[0].children[0]
+          .children.length
+      ).toEqual(6);
+    });
   }));
 });

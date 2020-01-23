@@ -169,6 +169,7 @@
                     (toggleAll)="toggleSelectAll($event)"
                     [formControl]="branchMultiFilterCtrl"
                     [placeholderLabel]="'Buscar'"
+                    [noEntriesFoundLabel]="'No se encontraron resultados'"
                   ></ngx-mat-select-search>
                   <mat-option
                     *ngFor="let branch of filteredBranchesMulti | async"

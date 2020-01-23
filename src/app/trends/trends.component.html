@@ -13,39 +13,76 @@
               [data]="averageSentiment"
               [type]="'ScatterChart'"
               [options]="options"
-              [title]="'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'"
-              [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
+              
+              [title]="
+                'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'
+              "
+              [columnNames]="['Entidad', 'Calificación','e']"
               [width]="500"
             ></google-chart>
           </div>
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 kt-portlet p-3 kt-portlet--border-bottom-brand">
-          <div class="row ">
+        <div
+          class="col-sm-12 col-md-12 col-lg-6 kt-portlet p-3 kt-portlet--border-bottom-brand"
+        >
+        <!--   <div class="row ">
             <div class="p-3 ">
+              <h6>
+                ¿Qué entidades mencionadas en los comentarios tienen el puntaje
+                de sentimiento promedio más alto?
+              </h6>
+              <table
+                mat-table
+                [dataSource]="lowerAverage"
+                class="mat-elevation-z8"
+              >
+               
+
+                <ng-container matColumnDef="entity">
+                  <th mat-header-cell *matHeaderCellDef>entity</th>
+                  <td mat-cell *matCellDef="let element">{{ element.entity }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="score">
+                  <th mat-header-cell *matHeaderCellDef>score</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.score }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="mentions">
+                  <th mat-header-cell *matHeaderCellDef>mentions</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.mentions }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: table1Columns"
+                ></tr>
+              </table>
+            </div>
+          </div> -->
+       <!--    <div class="row">
+            <div class="p-3 ">
+              <h6>
+                ¿Qué entidades mencionadas en los comentarios tienen el puntaje
+                de sentimiento promedio más bajo?
+              </h6>
               <google-chart
                 [data]="averageSentiment"
                 [type]="'Table'"
-                [options]="options"
-                [title]="'¿Qué entidades mencionadas en los comentarios tienen el puntaje de sentimiento promedio más alto?'"
-                [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
+                [columnNames]="[
+                  'Entidad',
+                  'Calificación',
+                  'Número de menciones'
+                ]"
                 [width]="500"
               ></google-chart>
             </div>
-          </div>
-          <div class="row">
-            <div class="p-3 ">
-              <google-chart
-                [data]="averageSentiment"
-                [type]="'Table'"
-                [options]="options"
-                [title]="
-                  '¿Qué entidades mencionadas en los comentarios tienen el puntaje de sentimiento promedio más bajo?'
-                "
-                [columnNames]="['Entidad', 'Calificación', 'Número de menciones']"
-                [width]="500"
-              ></google-chart>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

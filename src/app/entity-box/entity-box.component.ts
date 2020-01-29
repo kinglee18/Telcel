@@ -22,7 +22,7 @@ export class EntityBoxComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   dataSource = new MatTableDataSource([]);
   centers: Array<Branch> = [];
-
+  loading = true;
   constructor(
     private commentsService: CommentsService,
     private customerService: CustomerCareService
@@ -31,11 +31,13 @@ export class EntityBoxComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
+        this.loading = true;
         this.centers = centers;
         this.commentsService
           .getEntites(centers, this.customerService.getDate())
           .subscribe(entities => {
             this.dataSource.data = entities["entities"];
+            this.loading = false;
           });
       }
     );

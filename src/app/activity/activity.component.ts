@@ -26,6 +26,7 @@ export class ActivityComponent extends GeneralBoard implements Board {
       this.monthlyReviews = data["monthly_comments"];
       this.otherLanguages = data["other_languages"];
       this.languages = data["languages"];
+      this.loading = false;
     });
   }
 }

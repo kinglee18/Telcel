@@ -19,6 +19,7 @@
             <div class="col-xl-6">
               <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
                 <google-chart
+                  *apploading="loading"
                   [data]="scoreByMention"
                   [type]="'ColumnChart'"
                   [options]="{
@@ -40,6 +41,7 @@
             <div class="col-xl-6">
               <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
                 <google-chart
+                  *apploading="loading"
                   [data]="averages"
                   [type]="'LineChart'"
                   [options]="{

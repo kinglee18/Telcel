@@ -59,6 +59,7 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
         this.averageSentiment = data.averageSentiment;
         this.lowerAverage = data.lowerAverage;
         this.highestAverage = data.highestAverage;
+        this.loading = false;
       });
   }
 }

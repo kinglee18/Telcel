@@ -11,9 +11,13 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Comentarios</h5>
             <google-chart
+              *apploading="loading"
               [data]="monthlyReviews"
               [type]="'ColumnChart'"
-              [options]="{'bar': { 'groupWidth': '30%' },'legend': { 'position': 'none' }}"
+              [options]="{
+                bar: { groupWidth: '30%' },
+                legend: { position: 'none' }
+              }"
               [title]="'¿Cuántas reseñas se reciben mensualmente?'"
               [columnNames]="['Fecha', 'Comentarios']"
               [width]="1000"
@@ -31,6 +35,7 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
             <google-chart
+              *apploading="loading"
               [data]="languages"
               [type]="'PieChart'"
               [columnNames]="['Browser', 'Percentage']"
@@ -45,9 +50,10 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
             <google-chart
+              *apploading="loading"
               [data]="otherLanguages"
               [type]="'BarChart'"
-              [options]="{'legend': { 'position': 'none' }}"
+              [options]="{ legend: { position: 'none' } }"
               [title]="
                 '¿Qué idioma se usa en la sección de comentarios del formulario?'
               "

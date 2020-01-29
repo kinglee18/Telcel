@@ -16,15 +16,20 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { EntityBoxComponent } from './entity-box/entity-box.component';
+import { LoadingDirective } from './loading.directive';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
+  entryComponents: [LoaderComponent],
   declarations: [
     AppComponent,
     ActivityComponent,
     TrendsComponent,
     EntitiesSentimentComponent,
     ComentsComponent,
-    EntityBoxComponent
+    EntityBoxComponent,
+    LoadingDirective,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

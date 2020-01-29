@@ -28,6 +28,7 @@ export class EntitiesSentimentComponent extends GeneralBoard implements Board {
       .subscribe((data: any) => {
         this.scoreByMention = data.scoreByMention;
         this.averages = data.averages;
+        this.loading = false;
       });
   }
 }

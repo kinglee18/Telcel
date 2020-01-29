@@ -6,12 +6,14 @@ import { AfterViewInit, OnDestroy } from "@angular/core";
 export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
-  
+  loading = true;
+
   constructor(protected customerService: CustomerCareService) {}
 
   ngAfterViewInit() {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
+        this.loading = true;
         this.showBoardInfo(centers, this.customerService.getDate());
       }
     );

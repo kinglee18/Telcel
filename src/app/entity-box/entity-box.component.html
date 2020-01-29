@@ -1,0 +1,22 @@
+
+  <mat-form-field class="w-100">
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Entidad"
+    />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+    <ng-container matColumnDef="name" >
+      <th mat-header-cell *matHeaderCellDef>Entidad</th>
+      <td mat-cell *matCellDef="let element" (click)="selectedItem(element)">{{ element.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef># de menciones</th>
+      <td mat-cell *matCellDef="let element" (click)="selectedItem(element)">{{ element.amount }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['name', 'amount']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name', 'amount']"></tr>
+  </table>
+

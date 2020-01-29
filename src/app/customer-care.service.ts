@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { of, Subject, Observable } from "rxjs";
+import { of, Subject, Observable, ReplaySubject } from "rxjs";
 import { Branch } from "./branch";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
@@ -8,26 +8,14 @@ import { environment } from "src/environments/environment";
   providedIn: "root"
 })
 export class CustomerCareService {
-  private branchesupdated = new Subject<Array<Branch>>();
-  private dateRange 
-  constructor(private httpClient: HttpClient) {}
-  request: Observable<any>;
+  private branchesupdated = new ReplaySubject<Array<Branch>>();
   branchesChanged$ = this.branchesupdated.asObservable();
+  private dateRange;
 
-  private branches: Array<Branch> = [];
+  constructor(private httpClient: HttpClient) {}
 
-  getCenters(date?: any): Promise<Array<Branch>> {
-    return new Promise((resolve, reject) => {
-      if (date) {
-        this.request = this.httpClient.get(environment.api + "centers");
-        this.request.subscribe(data => {
-          this.branches = data;
-          resolve(this.branches);
-        });
-      } else {
-        resolve(this.branches);
-      }
-    });
+  getCenters(date?: any): Promise<any> {
+    return this.httpClient.get(environment.api + "centers").toPromise();
   }
 
   selectBranches(branches: Array<Branch>) {

@@ -9,31 +9,9 @@
       <div class="row row-full-height">
         <div class="col-sm-4">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand h-100">
-     
-            <mat-form-field>
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-              </mat-form-field>
-              
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-              
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef> Entidad </th>
-                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> # de menciones </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
-              
-   
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              
+            <app-entity-box
+              (selected)="selectedEntity($event)"
+            ></app-entity-box>
           </div>
         </div>
         <div class="col-sm-8">
@@ -43,9 +21,15 @@
                 <google-chart
                   [data]="scoreByMention"
                   [type]="'ColumnChart'"
-                  [options]="options"
-                  [title]="'Histograma de puntajes de sentimiento para cada mención'"
-                  [columnNames]="['Year', 'Asia']"
+                  [options]="{
+                    legend: { position: 'none' },
+                    hAxis: { title: 'Puntuación' },
+                    vAxis: { title: 'Número de menciones' }
+                  }"
+                  [title]="
+                    'Histograma de puntajes de sentimiento para cada mención'
+                  "
+                  [columnNames]="['Menciones', 'Puntuación']"
                   [width]="500"
                   [height]="250"
                 ></google-chart>
@@ -58,9 +42,14 @@
                 <google-chart
                   [data]="averages"
                   [type]="'LineChart'"
-                  [options]="options"
-                  [title]="'¿Cuántas reseñas se reciben mensualmente?'"
-                  [columnNames]="['Year', 'Asia']"
+                  [options]="{
+                    legend: { position: 'none' },
+                    hAxis: { title: 'Fecha' },
+                    vAxis: { title: 'Puntuación' }
+                  }"
+                  [title]="
+                    'Puntajes de sentimiento promedio a lo largo del tiempo'
+                  "
                   [width]="500"
                   [height]="250"
                 ></google-chart>

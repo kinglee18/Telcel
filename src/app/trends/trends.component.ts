@@ -14,8 +14,11 @@ import {
   templateUrl: "./trends.component.html",
   styleUrls: ["./trends.component.scss"]
 })
-export class TrendsComponent extends GeneralBoard implements Board {
+export class TrendsComponent extends GeneralBoard implements Board, OnInit {
   averageSentiment: Array<object> = [];
+  lowerAverage: Array<Array<number>> = [];
+  highestAverage: Array<Array<number>> = [];
+
   options = {
     hAxis: { title: "Número de menciones" },
     vAxis: { title: "Puntaje de sentimiento" },
@@ -24,11 +27,7 @@ export class TrendsComponent extends GeneralBoard implements Board {
   };
 
   table1Columns: string[] = ["Entidad", "Puntuación"];
-  lowerAverage = [
-    [2, 4, 5],
-    [2, 4, 1],
-    [2, 4, 0]
-  ];
+
   formatter = [];
   constructor(
     customerService: CustomerCareService,
@@ -46,7 +45,7 @@ export class TrendsComponent extends GeneralBoard implements Board {
         ])
         .subscribe(() => {
           this.formatter.push({
-            formatter: new google.visualization.BarFormat({ width: 120,  showValue: false }),
+            formatter: new google.visualization.BarFormat({ width: 120 }),
             colIndex: 2
           });
         });
@@ -58,6 +57,8 @@ export class TrendsComponent extends GeneralBoard implements Board {
       .getBySentiment(centers, date)
       .subscribe((data: any) => {
         this.averageSentiment = data.averageSentiment;
+        this.lowerAverage = data.lowerAverage;
+        this.highestAverage = data.highestAverage;
       });
   }
 }

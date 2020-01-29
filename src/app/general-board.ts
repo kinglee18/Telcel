@@ -1,19 +1,15 @@
 import { Subscription } from "rxjs";
 import { CustomerCareService } from "./customer-care.service";
 import { Board } from "./board";
+import { AfterViewInit, OnDestroy } from "@angular/core";
 
-export class GeneralBoard implements Board {
+export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
-
+  
   constructor(protected customerService: CustomerCareService) {}
 
   ngAfterViewInit() {
-    this.customerService.getCenters().then(data => {
-      if (data.length) {
-        this.showBoardInfo(data, this.customerService.getDate());
-      }
-    });
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
         this.showBoardInfo(centers, this.customerService.getDate());
@@ -25,6 +21,8 @@ export class GeneralBoard implements Board {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.request.unsubscribe();
+    if (this.request) {
+      this.request.unsubscribe();
+    }
   }
 }

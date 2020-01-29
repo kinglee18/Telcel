@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { EntityBoxComponent } from './entity-box/entity-box.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     ActivityComponent,
     TrendsComponent,
     EntitiesSentimentComponent,
-    ComentsComponent
+    ComentsComponent,
+    EntityBoxComponent
   ],
   imports: [
     BrowserModule,

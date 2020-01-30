@@ -12,11 +12,13 @@ import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CustomMaterialModule } from "./material.module";
 import { CustomerCareService } from "./customer-care.service";
-import { of } from "rxjs";
+import { of, Observable } from "rxjs";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { timeout } from "rxjs/operators";
 
 export class CustomerCareServiceStub {
+  branchesChanged$ = new Observable();
+
   getCenters() {
     return of([
       { name: "Tabasco cac", id: 22 },
@@ -28,6 +30,7 @@ export class CustomerCareServiceStub {
   }
   setDateRange(date) {}
   selectBranches() {}
+
 }
 
 describe("AppComponent", () => {

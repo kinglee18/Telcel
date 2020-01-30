@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EntityBoxComponent } from './entity-box.component';
 
@@ -23,3 +23,4 @@ describe('EntityBoxComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+ */

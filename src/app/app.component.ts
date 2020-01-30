@@ -5,7 +5,7 @@ import { MatSelect } from "@angular/material";
 import { take, takeUntil } from "rxjs/operators";
 import { CustomerCareService } from "./customer-care.service";
 import { Branch } from "./branch";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 @Component({
   selector: "app-root",
@@ -25,17 +25,6 @@ export class AppComponent {
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
 
   ngOnInit() {
-    this.branchMultiFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterBranchesMulti();
-      });
-
-    this.branchMultiCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(data => {
-        this.customerService.selectBranches(data);
-      });
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
       this.customerService.getCenters(date).then((centers: Array<any>) => {
@@ -45,13 +34,22 @@ export class AppComponent {
       });
     });
     this.dateRange.setValue({
-      begin: moment().subtract(30, 'd').toISOString(),
-      end:  moment().toISOString()
+      begin: moment()
+        .subtract(30, "d")
+        .toISOString(),
+      end: moment().toISOString()
     });
+    this.branchMultiFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBranchesMulti();
+      });
+    this.branchMultiCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(data => {
+        this.customerService.selectBranches(data);
+      });
   }
-
-
-
 
   ngOnDestroy() {
     this._onDestroy.next();

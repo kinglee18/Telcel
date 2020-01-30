@@ -1,4 +1,9 @@
-import { TestBed, async } from "@angular/core/testing";
+import {
+  TestBed,
+  async,
+  ComponentFixture,
+  ComponentFixtureAutoDetect
+} from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -9,6 +14,7 @@ import { CustomMaterialModule } from "./material.module";
 import { CustomerCareService } from "./customer-care.service";
 import { of } from "rxjs";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
+import { timeout } from "rxjs/operators";
 
 export class CustomerCareServiceStub {
   getCenters() {
@@ -18,13 +24,15 @@ export class CustomerCareServiceStub {
       { name: "oaxaca cac", id: 2 },
       { name: "queretaro cac", id: 3 },
       { name: "tlalpan", id: 4 }
-    ]);
+    ]).toPromise();
   }
-  setDateRange() {}
+  setDateRange(date) {}
   selectBranches() {}
 }
 
 describe("AppComponent", () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -38,34 +46,28 @@ describe("AppComponent", () => {
         SatNativeDateModule
       ],
       providers: [
+        { provide: ComponentFixtureAutoDetect, useValue: true },
         {
           provide: CustomerCareService,
           useValue: new CustomerCareServiceStub()
         }
       ],
       declarations: [AppComponent]
-    }).compileComponents();
+    });
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
   }));
 
-  it("should create the app", () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  it("should create the component", () => {
+    expect(component).toBeTruthy();
   });
 
-  it("should render title in a h1 tag", async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it("should render title in a h1 tag", async () => {
+    fixture.debugElement.nativeElement.querySelector("#cac-select").click();
     fixture.detectChanges();
-    const component = fixture.debugElement.nativeElement.querySelector(
-      "#cac-select"
-    );
-    component.click();
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(
-        document.querySelector("#cdk-overlay-0").children[0].children[0]
-          .children.length
-      ).toEqual(6);
-    });
-  }));
+    expect(
+      document.querySelector("#cdk-overlay-0").children[0].children[0].children
+        .length
+    ).toEqual(6);
+  });
 });

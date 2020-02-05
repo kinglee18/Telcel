@@ -1,28 +1,38 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TrendsComponent } from './trends.component';
-import { GoogleChartsModule } from 'angular-google-charts';
+import { TrendsComponent } from "./trends.component";
+import { GoogleChartsModule } from "angular-google-charts";
+import { CustomerCareServiceStub } from "../app.component.spec";
+import { LoadingStubDirective, commentsServiceStub } from "../activity/activity.component.spec";
 
-describe('TrendsComponent', () => {
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { CommentsService } from '../comments.service';
+import { CustomerCareService } from '../customer-care.service';
+
+describe("TrendsComponent", () => {
   let component: TrendsComponent;
   let fixture: ComponentFixture<TrendsComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TrendsComponent ],
-      imports: [GoogleChartsModule.forRoot()]
-    })
-    .compileComponents();
+    fixture = TestBed.configureTestingModule({
+      declarations: [TrendsComponent, LoadingStubDirective],
+      imports: [GoogleChartsModule.forRoot()],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        {
+          provide: CommentsService,
+          useValue: new commentsServiceStub()
+        },
+        {
+          provide: CustomerCareService,
+          useValue: new CustomerCareServiceStub()
+        }
+      ]
+    }).createComponent(TrendsComponent);
+    component = fixture.componentInstance;
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TrendsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
- */

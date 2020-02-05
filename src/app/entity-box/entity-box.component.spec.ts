@@ -1,6 +1,12 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EntityBoxComponent } from './entity-box.component';
+import { CustomMaterialModule } from '../material.module';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { LoadingStubDirective, commentsServiceStub } from '../activity/activity.component.spec';
+import { CommentsService } from '../comments.service';
+import { CustomerCareService } from '../customer-care.service';
+import { CustomerCareServiceStub } from '../app.component.spec';
 
 describe('EntityBoxComponent', () => {
   let component: EntityBoxComponent;
@@ -8,7 +14,19 @@ describe('EntityBoxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EntityBoxComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ EntityBoxComponent, LoadingStubDirective ],
+      imports: [CustomMaterialModule],
+      providers: [
+        {
+          provide: CommentsService,
+          useValue: new commentsServiceStub()
+        },
+        {
+          provide: CustomerCareService,
+          useValue: new CustomerCareServiceStub()
+        }
+      ]
     })
     .compileComponents();
   }));
@@ -23,4 +41,4 @@ describe('EntityBoxComponent', () => {
     expect(component).toBeTruthy();
   });
 });
- */
+ 

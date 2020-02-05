@@ -4,7 +4,8 @@ import {
   Input,
   OnDestroy,
   Output,
-  EventEmitter
+  EventEmitter,
+  Renderer2
 } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { CommentsService } from "../comments.service";
@@ -17,31 +18,23 @@ import { Branch } from "../branch";
   templateUrl: "./entity-box.component.html",
   styleUrls: ["./entity-box.component.scss"]
 })
-export class EntityBoxComponent implements OnInit, OnDestroy {
+export class EntityBoxComponent implements OnDestroy {
   @Output() selected: EventEmitter<any> = new EventEmitter();
+  @Input() loading = true;
+  @Input()
+  set data(data: Array<Branch>) {
+    this.dataSource.data = data;
+  }
+  
   subscription: Subscription;
   dataSource = new MatTableDataSource([]);
   centers: Array<Branch> = [];
-  loading = true;
+
   constructor(
     private commentsService: CommentsService,
-    private customerService: CustomerCareService
+    private customerService: CustomerCareService,
+    private renderer: Renderer2
   ) {}
-
-  ngOnInit() {
-    this.subscription = this.customerService.branchesChanged$.subscribe(
-      centers => {
-        this.loading = true;
-        this.centers = centers;
-        this.commentsService
-          .getEntites(centers, this.customerService.getDate())
-          .subscribe(entities => {
-            this.dataSource.data = entities["entities"];
-            this.loading = false;
-          });
-      }
-    );
-  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -51,7 +44,14 @@ export class EntityBoxComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  selectedItem(element) {
+  selectedItem(element, event: any) {
+    const rows: HTMLCollection =
+      event.target.parentElement.parentElement.children;
+    for (let x = 0; x < rows.length; x++) {
+      this.renderer.removeClass(rows.item(x), "active");
+    }
+    this.renderer.addClass(event.target.parentElement, "active");
+
     this.selected.emit({
       entity: element,
       centers: this.centers,

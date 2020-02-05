@@ -19,8 +19,19 @@ export class EntitiesSentimentComponent extends GeneralBoard implements Board {
   }
   scoreByMention = [];
   averages = [];
+  boxLoading: boolean;
+  entities: Array<any> = [];
 
-  showBoardInfo(centers, date) {}
+  showBoardInfo(centers, date) {
+    this.boxLoading = true;
+    this.commentsService
+    .getEntites(centers, this.customerService.getDate())
+    .subscribe(entities => {
+      this.boxLoading = false;
+      this.entities = entities["entities"];
+      
+    });
+  }
 
   selectedEntity(selected: any) {
     this.commentsService

@@ -10,13 +10,13 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Entidad</th>
-      <td mat-cell *matCellDef="let element" (click)="selectedItem(element)">
-        {{ element.name }}
+      <td mat-cell *matCellDef="let element" (click)="selectedItem(element, $event)">
+        <mat-icon matListIcon>check</mat-icon> {{ element.name }}
       </td>
     </ng-container>
     <ng-container matColumnDef="amount">
       <th mat-header-cell *matHeaderCellDef># de menciones</th>
-      <td mat-cell *matCellDef="let element" (click)="selectedItem(element)">
+      <td mat-cell *matCellDef="let element" (click)="selectedItem(element, $event)">
         {{ element.amount }}
       </td>
     </ng-container>

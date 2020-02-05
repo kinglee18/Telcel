@@ -11,6 +11,8 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand h-100">
             <app-entity-box
               (selected)="selectedEntity($event)"
+              [loading]= "boxLoading"
+              [data]= entities
             ></app-entity-box>
           </div>
         </div>

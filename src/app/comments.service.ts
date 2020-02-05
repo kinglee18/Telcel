@@ -17,7 +17,7 @@ export class CommentsService {
     return this.httpClient.get(environment.api + "comments/sentiment");
   }
 
-  getEntites(centers, date) {
+  getEntites(centers, date): Observable<any> {
     return this.httpClient.get(environment.api + "comments/entities");
   }
 

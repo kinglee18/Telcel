@@ -2,7 +2,12 @@
   top: 32% !important;
 }
 
-
 .kt-header__brand {
   background-color: white;
+}
+
+.kt-menu__nav {
+  li.active i {
+    color: #5867dd!important;
+  }
 }

@@ -5,56 +5,47 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
-  Renderer2
+  Renderer2,
+  ViewChildren,
+  QueryList,
+  ElementRef
 } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { CommentsService } from "../comments.service";
 import { CustomerCareService } from "../customer-care.service";
 import { Subscription } from "rxjs";
 import { Branch } from "../branch";
+import { SelectionModel } from "@angular/cdk/collections";
 
 @Component({
   selector: "app-entity-box",
   templateUrl: "./entity-box.component.html",
   styleUrls: ["./entity-box.component.scss"]
 })
-export class EntityBoxComponent implements OnDestroy {
+export class EntityBoxComponent {
   @Output() selected: EventEmitter<any> = new EventEmitter();
+  selection: SelectionModel<any>;
   @Input() loading = true;
   @Input()
   set data(data: Array<Branch>) {
+    this.selection = new SelectionModel<any>(false, []);
     this.dataSource.data = data;
+    if (data.length) {this.selectedItem(data[0])};
   }
-  
+
   subscription: Subscription;
   dataSource = new MatTableDataSource([]);
-  centers: Array<Branch> = [];
 
-  constructor(
-    private commentsService: CommentsService,
-    private customerService: CustomerCareService,
-    private renderer: Renderer2
-  ) {}
+  constructor(private customerService: CustomerCareService) {}
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
-  selectedItem(element, event: any) {
-    const rows: HTMLCollection =
-      event.target.parentElement.parentElement.children;
-    for (let x = 0; x < rows.length; x++) {
-      this.renderer.removeClass(rows.item(x), "active");
-    }
-    this.renderer.addClass(event.target.parentElement, "active");
-
+  selectedItem(element) {
+    this.selection.toggle(element);
     this.selected.emit({
       entity: element,
-      centers: this.centers,
       date: this.customerService.getDate()
     });
   }

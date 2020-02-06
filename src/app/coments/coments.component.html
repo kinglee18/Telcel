@@ -1,62 +1,60 @@
 <div class="col-md-12 pt-3">
-    <div
-      class=" kt-container kt-grid__item kt-grid__item--fluid kt-container--fluid"
-    >
-      <h2>Detalles de Sentimiento por Entidad</h2>
-    </div>
-    <div class="row">
-      <div class="col-xl-6">
-        <div class="row row-full-height">
-          <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
-              <h5>Histograma de puntajes de sentimiento para cada mención</h5>
-     <!--          <google-chart
-                [data]="byMention"
-                [type]="'Histogram'"
-                [options]="options"
-                [title]="'¿Cuántas reseñas se reciben mensualmente?'"
-                [columnNames]="['Year', 'Asia']"
-                [width]="1000"
-                [height]="250"
-              ></google-chart> -->
-            </div>
+  <div
+    class=" kt-container kt-grid__item kt-grid__item--fluid kt-container--fluid"
+  ></div>
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="row row-full-height">
+        <div class="col-sm-4 col-md-4 col-lg-4">
+          <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+            <div class="row"></div>
+            <app-entity-box
+              (selected)="selectedEntity($event)"
+              [loading]="loading"
+              [data]="entities"
+            ></app-entity-box>
+
+    
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xl-6">
-        <div class="row row-full-height">
-          <div class="col-sm-12 col-md-12 col-lg-6">
-            <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
-              <h5>Puntajes de sentimiento promedio a lo largo del tiempo</h5>
-              <!--         <google-chart
-                  [data]="languages"
-                  [type]="'PieChart'"
-                  [columnNames] = "['Browser', 'Percentage']"
-                  [title]="
-                    '¿Qué idioma se usa en la sección de comentarios del formulario?'
-                  "
-                  [width]="450"
-                ></google-chart> -->
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-6">
-            <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
-              <h5>P---o</h5>
-              <!--         <google-chart
-                  [data]="languages"
-                  [type]="'PieChart'"
-                  [columnNames] = "['Browser', 'Percentage']"
-                  [title]="
-                    '¿Qué idioma se usa en la sección de comentarios del formulario?'
-                  "
-                  [width]="450"
-                ></google-chart> -->
-            </div>
-          </div>
+        <div class="col-sm-8 col-md-8 col-lg-8 kt-portlet p-3  kt-portlet--border-bottom-brand">
+          <h5>Texto completo de los comentarios por entidad</h5>
+
+          <table
+            *apploading="commentsLoader"
+            mat-table
+            [dataSource]="dataSource"
+            class="w-100"
+          >
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Fecha</th>
+              <td mat-cell *matCellDef="let element">
+              {{ element.date }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>id</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.id }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="comment">
+              <th mat-header-cell *matHeaderCellDef>Comentario</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.comment }}
+              </td>
+            </ng-container>
+            <tr
+              mat-header-row
+              *matHeaderRowDef="['date', 'id', 'comment']"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: ['date', 'id', 'comment']"
+            ></tr>
+          </table>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

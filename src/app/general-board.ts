@@ -7,12 +7,14 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
   loading = true;
-
+  centers: Array<any>;
+  
   constructor(protected customerService: CustomerCareService) {}
 
   ngAfterViewInit() {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
+        this.centers = centers;
         this.loading = true;
         this.showBoardInfo(centers, this.customerService.getDate());
       }
@@ -23,8 +25,6 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    if (this.request) {
-      this.request.unsubscribe();
-    }
+    this.request.unsubscribe();
   }
 }

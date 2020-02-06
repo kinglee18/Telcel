@@ -16,7 +16,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatProgressSpinnerModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatRadioModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { MomentDateAdapter } from "@angular/material-moment-adapter";
@@ -36,7 +37,8 @@ const list = [
   MatTableModule,
   MatTabsModule,
   MatProgressSpinnerModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatRadioModule
 ];
 
 export const MY_FORMATS = {

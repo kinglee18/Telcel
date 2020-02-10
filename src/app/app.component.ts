@@ -27,11 +27,16 @@ export class AppComponent {
   ngOnInit() {
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
-      this.customerService.getCenters(date).then((centers: Array<any>) => {
-        this.branches = centers;
-        this.filteredBranchesMulti.next(centers.slice());
-        this.branchMultiCtrl.setValue(centers.slice());
-      });
+      this.customerService
+        .getCenters(date)
+        .then((centers: Array<any>) => {
+          this.branches = centers;
+          this.filteredBranchesMulti.next(centers.slice());
+          this.branchMultiCtrl.setValue(centers.slice());
+        })
+        .catch(err => {
+          alert("No es posible consultar la información en este momento");
+        });
     });
     this.dateRange.setValue({
       begin: moment()

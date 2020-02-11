@@ -8,7 +8,7 @@
     <div class="col-xl-12">
       <div class="row row-full-height">
         <div class="col-md-4">
-          <div class="kt-portlet p-3  kt-portlet--border-bottom-brand h-100">
+          <div class="kt-portlet p-3  kt-portlet--border-bottom-brand h-50">
             <app-entity-box
               (selected)="selectedEntity($event)"
               [loading]= "loading"
@@ -33,8 +33,8 @@
                     'Histograma de puntajes de sentimiento para cada mención'
                   "
                   [columnNames]="['Menciones', 'Puntuación']"
-                  [width]="500"
-                  [height]="250"
+                  [width]="700"
+                  [height]="200"
                 ></google-chart>
               </div>
             </div>
@@ -54,8 +54,8 @@
                   [title]="
                     'Puntajes de sentimiento promedio a lo largo del tiempo'
                   "
-                  [width]="500"
-                  [height]="250"
+                  [width]="700"
+                  [height]="200"
                 ></google-chart>
               </div>
             </div>

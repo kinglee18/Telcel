@@ -1,25 +1,22 @@
-import { GeneralBoard } from './general-board';
-import { async, TestBed } from '@angular/core/testing';
-import { CustomerCareService } from './customer-care.service';
-import { CustomerCareServiceStub } from './app.component.spec';
+import { GeneralBoard } from "./general-board";
+import { async, TestBed } from "@angular/core/testing";
+import { CustomerCareService } from "./customer-care.service";
+import { CustomerCareServiceStub } from "./app.component.spec";
 
-describe('GeneralBoard', () => {
+describe("GeneralBoard", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
         {
-          use: CustomerCareService,
+          provide: CustomerCareService,
           useValue: new CustomerCareServiceStub()
-
         }
       ]
-    })
-    .compileComponents();
-  }))
+    }).compileComponents();
+  }));
 
-  
-  it('should create an instance', () => {
-    let service = TestBed.get(CustomerCareService)
-     expect(new GeneralBoard(service)).toBeTruthy(); 
+  it("should create an instance", () => {
+    let service = TestBed.get(CustomerCareService);
+    expect(new GeneralBoard(service)).toBeTruthy();
   });
 });

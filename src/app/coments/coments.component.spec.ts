@@ -1,33 +1,45 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { GoogleChartsModule } from "angular-google-charts";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CustomMaterialModule } from "../material.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { LoadingStubDirective, commentsServiceStub } from "../activity/activity.component.spec";
+import { CommentsService } from '../comments.service';
+import { CustomerCareService } from '../customer-care.service';
+import { CustomerCareServiceStub } from '../app.component.spec';
 import { ComentsComponent } from './coments.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { GoogleChartsModule } from 'angular-google-charts';
-import { CustomMaterialModule } from '../material.module';
 
-describe('ComentsComponent', () => {
+describe("ComentsComponent", () => {
   let component: ComentsComponent;
   let fixture: ComponentFixture<ComentsComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ComentsComponent ],
+    fixture = TestBed.configureTestingModule({
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ComentsComponent, LoadingStubDirective],
       imports: [
         GoogleChartsModule.forRoot(),
         ReactiveFormsModule,
-        CustomMaterialModule
+        CustomMaterialModule,
+        BrowserAnimationsModule
+      ],
+      providers: [
+        {
+          provide: CommentsService,
+          useValue: new commentsServiceStub()
+        },
+        {
+          provide: CustomerCareService,
+          useValue: new CustomerCareServiceStub()
+        }
       ]
-    })
-    .compileComponents();
+    }).createComponent(ComentsComponent);
+    component = fixture.componentInstance;
   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ComentsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

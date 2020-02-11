@@ -30,7 +30,6 @@ export class CustomerCareServiceStub {
   }
   setDateRange(date) {}
   selectBranches() {}
-
 }
 
 describe("AppComponent", () => {

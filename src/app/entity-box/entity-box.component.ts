@@ -45,7 +45,7 @@ export class EntityBoxComponent {
   selectedItem(element) {
     this.selection.toggle(element);
     this.selected.emit({
-      entity: element,
+      entity: element.id,
       date: this.customerService.getDate()
     });
   }

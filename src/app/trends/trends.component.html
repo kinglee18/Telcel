@@ -17,7 +17,7 @@
               [title]="
                 'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'
               "
-              [columnNames]="['Entidad', 'Calificación']"
+              [columnNames]="['Entidad', 'Calificación', {'type': 'string','role': 'style'}, {'type': 'string', 'role': 'tooltip', 'p': {'html': true}}]"
               [width]="500"
             ></google-chart>
           </div>

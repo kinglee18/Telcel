@@ -8,9 +8,6 @@ import {
   MatAutocompleteModule,
   MatSelectModule,
   MatDatepickerModule,
-  MAT_DATE_LOCALE,
-  MAT_DATE_FORMATS,
-  DateAdapter,
   MatExpansionModule,
   MatChipsModule,
   MatTableModule,
@@ -20,7 +17,16 @@ import {
   MatRadioModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
-import { MomentDateAdapter } from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  SatDatepickerModule
+} from "saturn-datepicker";
+import {
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter
+} from "@angular/material-moment-adapter";
 
 const list = [
   MatButtonModule,
@@ -38,15 +44,16 @@ const list = [
   MatTabsModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
-  MatRadioModule
+  MatRadioModule,
+  SatDatepickerModule
 ];
 
 export const MY_FORMATS = {
   parse: {
-    dateInput: "DD/MMM/YYYY"
+    dateInput: "YYYY"
   },
   display: {
-    dateInput: "DD/MM/YYYY",
+    dateInput: "YYYY",
     monthYearLabel: "MMM YYYY",
     dateA11yLabel: "LL",
     monthYearA11yLabel: "MMMM YYYY"
@@ -57,13 +64,8 @@ export const MY_FORMATS = {
   imports: list,
   exports: list,
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: "es-MX" },
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE]
-    },
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: DateAdapter, useClass: MomentDateAdapter, useValue: MY_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: "es-MX" }
   ]
 })
 export class CustomMaterialModule {}

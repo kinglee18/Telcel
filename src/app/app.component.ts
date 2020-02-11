@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(private customerService: CustomerCareService) {}
   protected branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
-  public dateRange: FormControl = new FormControl();
+  public dateRange: FormControl = new FormControl(moment());
   public branchMultiFilterCtrl: FormControl = new FormControl();
   public filteredBranchesMulti: ReplaySubject<Branch[]> = new ReplaySubject<
     Branch[]
@@ -28,7 +28,7 @@ export class AppComponent {
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
       this.customerService
-        .getCenters(date)
+        .getCenters()
         .then((centers: Array<any>) => {
           this.branches = centers;
           this.filteredBranchesMulti.next(centers.slice());
@@ -51,7 +51,7 @@ export class AppComponent {
       });
     this.branchMultiCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
-      .subscribe(data => {
+      .subscribe((data: Array<any>) => {
         this.customerService.selectBranches(data);
       });
   }

@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, of } from "rxjs";
-import { timeout, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
@@ -11,27 +10,38 @@ export class CommentsService {
   constructor(private httpClient: HttpClient) {}
 
   getMonthlyLanguageComments(centers, date): Observable<object> {
-    return this.httpClient.get(environment.api + "comments/monthly");
+    return this.httpClient.get(environment.api + "comments/monthly", {
+      params: { centers, begin: date.begin, end: date.end }
+    });
   }
 
   getBySentiment(centers, date): Observable<object> {
-    return this.httpClient.get(environment.api + "comments/sentiment");
+    return this.httpClient.get(environment.api + "comments/sentiment", {
+      params: { centers, begin: date.begin, end: date.end }
+    });
   }
 
   getEntites(centers, date): Observable<any> {
-    return this.httpClient.get(environment.api + "comments/entities");
+    return this.httpClient.get(environment.api + "comments/entities", {
+      params: { centers, begin: date.begin, end: date.end }
+    });
   }
 
   getEntitiesByComments(centers, date): Observable<any> {
-    return this.httpClient.get(environment.api + "comments/entities");
+    return this.httpClient.get(environment.api + "comments/entities", {
+      params: { centers, begin: date.begin, end: date.end }
+    });
   }
 
   getEntitiesScores(centers, date, entity) {
-    return this.httpClient.get(environment.api + "comments/entities/scores");
+    return this.httpClient.get(environment.api + "comments/entities/scores", {
+      params: { centers, begin: date.begin, end: date.end, entity }
+    });
   }
 
   getComments(centers, date, entity): Observable<any> {
-    return of([{ date: "01-01-01", id: "22", comment: "hola" }]).pipe(delay(1000));
-    /*  return this.httpClient.get(environment.api + "comments/entities"); */
+    return this.httpClient.get(environment.api + "comments/list", {
+      params: { centers, begin: date.begin, end: date.end, entity }
+    });
   }
 }

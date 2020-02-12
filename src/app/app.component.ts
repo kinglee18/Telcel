@@ -21,6 +21,7 @@ export class AppComponent {
   public filteredBranchesMulti: ReplaySubject<Branch[]> = new ReplaySubject<
     Branch[]
   >(1);
+  private toggleAllCheckboxChecked = false;
   protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
 
@@ -32,7 +33,7 @@ export class AppComponent {
         .then((centers: Array<any>) => {
           this.branches = centers;
           this.filteredBranchesMulti.next(centers.slice());
-          this.branchMultiCtrl.setValue(centers.slice());
+          this.toggleSelectAll(true);
         })
         .catch(err => {
           alert("No es posible consultar la información en este momento");
@@ -53,6 +54,8 @@ export class AppComponent {
       .pipe(takeUntil(this._onDestroy))
       .subscribe((data: Array<any>) => {
         this.customerService.selectBranches(data);
+        this.toggleAllCheckboxChecked =
+          this.branchMultiCtrl.value.length === this.branches.length;
       });
   }
 
@@ -62,6 +65,7 @@ export class AppComponent {
   }
 
   toggleSelectAll(selectAllValue: boolean) {
+    this.toggleAllCheckboxChecked = selectAllValue;
     this.filteredBranchesMulti
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(val => {

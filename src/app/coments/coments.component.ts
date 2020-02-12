@@ -12,6 +12,7 @@ export class ComentsComponent extends GeneralBoard {
   commentsLoader = true;
   entities: Array<any> = [];
   dataSource = new MatTableDataSource([]);
+  entityName: string;
 
   constructor(
     customerService: CustomerCareService,
@@ -30,7 +31,8 @@ export class ComentsComponent extends GeneralBoard {
       });
   }
 
-  selectedEntity({ date, entity }) {
+  selectedEntity({ date, entity, entityName }) {
+    this.entityName = entityName;
     this.commentsLoader = true;
     this.commentsService
       .getComments(this.centers, date, entity)
@@ -38,5 +40,16 @@ export class ComentsComponent extends GeneralBoard {
         this.dataSource = data;
         this.commentsLoader = false;
       });
+  }
+
+  highlightComment(comment: string): string {
+    return comment
+      .replace(this.entityName, `<b>${this.entityName}</b>`)
+      .replace(
+        this.entityName.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+        `<b>${this.entityName
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")}</b>`
+      );
   }
 }

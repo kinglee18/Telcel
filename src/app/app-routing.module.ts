@@ -6,11 +6,11 @@ import { EntitiesSentimentComponent } from "./entities-sentiment/entities-sentim
 import { ComentsComponent } from "./coments/coments.component";
 
 const routes: Routes = [
-
-      { path: "activity", component: ActivityComponent },
-      { path: "trends", component: TrendsComponent },
-      { path: "entities-sentiment", component: EntitiesSentimentComponent },
-      { path: "coments", component: ComentsComponent }
+  { path: "", redirectTo: "activity", pathMatch: "full" },
+  { path: "activity", component: ActivityComponent },
+  { path: "trends", component: TrendsComponent },
+  { path: "entities-sentiment", component: EntitiesSentimentComponent },
+  { path: "coments", component: ComentsComponent }
 ];
 
 @NgModule({

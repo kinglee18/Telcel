@@ -11,37 +11,37 @@ export class CommentsService {
 
   getMonthlyLanguageComments(centers, date): Observable<object> {
     return this.httpClient.get(environment.api + "comments/monthly", {
-      params: { centers, begin: date.begin, end: date.end }
+      params: { centers, date_init: date.begin, date_end: date.end }
     });
   }
 
   getBySentiment(centers, date): Observable<object> {
     return this.httpClient.get(environment.api + "comments/sentiment", {
-      params: { centers, begin: date.begin, end: date.end }
+      params: { centers, date_init: date.begin, date_end: date.end }
     });
   }
 
   getEntites(centers, date): Observable<any> {
     return this.httpClient.get(environment.api + "comments/entities", {
-      params: { centers, begin: date.begin, end: date.end }
+      params: { centers, date_init: date.begin, date_end: date.end }
     });
   }
 
   getEntitiesByComments(centers, date): Observable<any> {
     return this.httpClient.get(environment.api + "comments/entities", {
-      params: { centers, begin: date.begin, end: date.end }
+      params: { centers, date_init: date.begin, date_end: date.end }
     });
   }
 
   getEntitiesScores(centers, date, entity) {
     return this.httpClient.get(environment.api + "comments/entities/scores", {
-      params: { centers, begin: date.begin, end: date.end, entity }
+      params: { centers, date_init: date.begin, date_end: date.end, entity }
     });
   }
 
   getComments(centers, date, entity): Observable<any> {
     return this.httpClient.get(environment.api + "comments/list", {
-      params: { centers, begin: date.begin, end: date.end, entity }
+      params: { centers, date_init: date.begin, date_end: date.end, entity }
     });
   }
 }

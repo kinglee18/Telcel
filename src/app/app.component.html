@@ -152,6 +152,7 @@
                   <ngx-mat-select-search
                     id="cac-search-box"
                     [showToggleAllCheckbox]="true"
+                    [toggleAllCheckboxChecked]="toggleAllCheckboxChecked"
                     (toggleAll)="toggleSelectAll($event)"
                     [formControl]="branchMultiFilterCtrl"
                     [placeholderLabel]="'Buscar'"

@@ -7,5 +7,5 @@ RUN npm run build --prod
 
 FROM nginx:alpine
 COPY --from=node /app/dist/cac /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf
-COPY /nginx /etc/nginx/conf.d
+#RUN rm /etc/nginx/conf.d/default.conf
+#COPY /nginx /etc/nginx/conf.d

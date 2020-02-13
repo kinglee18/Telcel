@@ -29,7 +29,6 @@ export class EntitiesSentimentComponent extends GeneralBoard implements Board {
     .subscribe(entities => {
       this.loading = false;
       this.entities = entities["entities"];
-      
     });
   }
 

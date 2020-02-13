@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { CustomerCareService } from "../customer-care.service";
-import { Subscription } from "rxjs";
 import { GeneralBoard } from "../general-board";
 import { Board } from "../board";
 import { CommentsService } from "../comments.service";
@@ -59,8 +58,14 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
         this.averageSentiment = this.setScatterChartStyle(
           data.averageSentiment
         );
-        this.lowerAverage = data.lowerAverage;
-        this.highestAverage = data.highestAverage;
+        this.lowerAverage = data.lowerAverage.map((element: Array<any>) => {
+          [element[1], element[2]] = [element[2], element[1]];
+          return element;
+        });
+        this.highestAverage = data.highestAverage.map((element: Array<any>) => {
+          [element[1], element[2]] = [element[2], element[1]];
+          return element;
+        });
         this.loading = false;
       });
   }

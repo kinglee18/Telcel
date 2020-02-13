@@ -1,17 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-  Renderer2,
-  ViewChildren,
-  QueryList,
-  ElementRef
-} from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
-import { CommentsService } from "../comments.service";
 import { CustomerCareService } from "../customer-care.service";
 import { Subscription } from "rxjs";
 import { Branch } from "../branch";
@@ -30,7 +18,9 @@ export class EntityBoxComponent {
   set data(data: Array<Branch>) {
     this.selection = new SelectionModel<any>(false, []);
     this.dataSource.data = data;
-    if (data.length) {this.selectedItem(data[0])};
+    if (data.length) {
+      this.selectedItem(data[0]);
+    }
   }
 
   subscription: Subscription;

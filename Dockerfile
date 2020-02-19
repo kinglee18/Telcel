@@ -2,7 +2,7 @@ FROM node:12.2.0 as node
 VOLUME /data
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install --only=prod
 RUN npm run build --prod
 
 FROM nginx:alpine

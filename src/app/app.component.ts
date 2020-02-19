@@ -77,6 +77,17 @@ export class AppComponent {
       });
   }
 
+  /**
+   *
+   * @param $event
+   * @param center
+   */
+  selectOnlyOne($event: any, center) {
+    $event.stopPropagation();
+    this.toggleSelectAll(false);
+    this.branchMultiCtrl.patchValue([center]);
+  }
+
   protected filterBranchesMulti() {
     if (!this.branches) {
       return;

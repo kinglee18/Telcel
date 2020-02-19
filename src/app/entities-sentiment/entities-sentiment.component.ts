@@ -37,8 +37,8 @@ export class EntitiesSentimentComponent extends GeneralBoard implements Board {
     this.commentsService
       .getEntitiesScores(this.centers, selected.date, selected.entity)
       .subscribe((data: any) => {
-        this.scoreByMention = data.scoreByMention;
-        this.averages = data.averages;
+        this.scoreByMention = data['score_and_mentions'];
+        this.averages = data['score_by_time'];
         this.chartsLoading = false;
       });
   }

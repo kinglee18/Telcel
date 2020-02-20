@@ -21,6 +21,7 @@
             <div class="col-xl-12">
               <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
                 <google-chart
+                  class="chart"
                   *apploading="chartsLoading"
                   [data]="scoreByMention"
                   [type]="'ColumnChart'"
@@ -33,8 +34,7 @@
                     'Histograma de puntajes de sentimiento para cada mención'
                   "
                   [columnNames]="['Menciones', 'Puntuación']"
-                  [width]="700"
-                  [height]="200"
+                 
                 ></google-chart>
               </div>
             </div>
@@ -43,19 +43,19 @@
             <div class="col-xl-12">
               <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
                 <google-chart
+                  class="chart"
                   *apploading="chartsLoading"
                   [data]="averages"
                   [type]="'LineChart'"
                   [options]="{
                     legend: { position: 'none' },
-                    hAxis: { title: 'Fecha' },
+                    hAxis: { title: 'Fecha', textPosition: 'out' },
                     vAxis: { title: 'Puntuación' }
                   }"
                   [title]="
                     'Puntajes de sentimiento promedio a lo largo del tiempo'
                   "
-                  [width]="700"
-                  [height]="200"
+                 
                 ></google-chart>
               </div>
             </div>

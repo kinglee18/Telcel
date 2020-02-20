@@ -18,7 +18,8 @@
           </div>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-8 kt-portlet p-3  kt-portlet--border-bottom-brand">
-          <h5>Texto completo de los comentarios por entidad</h5>
+          <div>
+                   <h5>Texto completo de los comentarios por entidad</h5>
 
           <table
             *apploading="commentsLoader"
@@ -47,6 +48,8 @@
               *matRowDef="let row; columns: ['date', 'comment']"
             ></tr>
           </table>
+          </div>
+   
         </div>
       </div>
     </div>

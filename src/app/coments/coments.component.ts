@@ -43,13 +43,20 @@ export class ComentsComponent extends GeneralBoard {
   }
 
   highlightComment(comment: string): string {
-    return comment
-      .replace(this.entityName, `<b>${this.entityName}</b>`)
-      .replace(
-        this.entityName.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
-        `<b>${this.entityName
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")}</b>`
-      );
+    const position = this.normalizedComment(comment).search(
+      this.normalizedComment(this.entityName)
+    );
+    return position > -1
+      ? `${comment.slice(0, position)}<b>${comment.slice(
+          position,
+          position + this.entityName.length
+        )}</b>${comment.slice(
+          position + this.entityName.length, comment.length
+        )}`
+      : comment;
+  }
+
+  normalizedComment(comment: string): string {
+    return comment.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 }

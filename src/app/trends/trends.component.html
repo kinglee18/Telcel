@@ -10,6 +10,7 @@
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <google-chart
+              class="chart"
               *apploading="loading"
               [data]="averageSentiment"
               [type]="'ScatterChart'"
@@ -23,7 +24,7 @@
                 { type: 'string', role: 'style' },
                 { type: 'string', role: 'tooltip', p: { html: true } }
               ]"
-              [width]="500"
+            
             ></google-chart>
           </div>
         </div>
@@ -37,6 +38,7 @@
                 de sentimiento promedio más alto?
               </h6>
               <google-chart
+                class="chart"
                 *apploading="loading"
                 [data]="highestAverage"
                 [type]="'Table'"
@@ -48,7 +50,7 @@
                   'Calificación',
                   'Número de menciones'
                 ]"
-                [width]="500"
+              
                 [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
                 [formatter]="formatter"
               ></google-chart>
@@ -61,6 +63,7 @@
                 de sentimiento promedio más bajo?
               </h6>
               <google-chart
+                class="chart"
                 *apploading="loading"
                 [data]="lowerAverage"
                 [type]="'Table'"
@@ -69,7 +72,7 @@
                   'Calificación',
                   'Número de menciones'
                 ]"
-                [width]="500"
+              
                 [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
                 [formatter]="formatter"
               ></google-chart>

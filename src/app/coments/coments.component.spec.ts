@@ -4,11 +4,14 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CustomMaterialModule } from "../material.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { LoadingStubDirective, commentsServiceStub } from "../activity/activity.component.spec";
-import { CommentsService } from '../comments.service';
-import { CustomerCareService } from '../customer-care.service';
-import { CustomerCareServiceStub } from '../app.component.spec';
-import { ComentsComponent } from './coments.component';
+import {
+  LoadingStubDirective,
+  commentsServiceStub
+} from "../activity/activity.component.spec";
+import { CommentsService } from "../comments.service";
+import { CustomerCareService } from "../customer-care.service";
+import { CustomerCareServiceStub } from "../app.component.spec";
+import { ComentsComponent } from "./coments.component";
 
 describe("ComentsComponent", () => {
   let component: ComentsComponent;
@@ -38,8 +41,14 @@ describe("ComentsComponent", () => {
     component = fixture.componentInstance;
   }));
 
-
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should return a comment with a <b> tag inside if it matches with the keyword", () => {
+    component.entityName = "Atención";
+    expect(
+      component.highlightComment(" que buena atencion recibi en sucursal")
+    ).toBe(" que buena <b>atencion</b> recibi en sucursal");
   });
 });

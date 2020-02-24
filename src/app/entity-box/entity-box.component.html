@@ -1,4 +1,4 @@
-<div *apploading="loading" id="box-container">
+<div *apploading="loading">
   <mat-form-field class="w-100">
     <input
       matInput
@@ -6,8 +6,8 @@
       placeholder="Buscar"
     />
   </mat-form-field>
-
-  <mat-radio-group>
+<div  id="box-container">
+    <mat-radio-group >
     <table mat-table [dataSource]="dataSource" class=" w-100">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Entidad</th>
@@ -33,4 +33,6 @@
       <tr mat-header-row *matHeaderRowDef="['name', 'amount']; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: ['name', 'amount']"></tr></table
   ></mat-radio-group>
+</div>
+
 </div>

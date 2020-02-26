@@ -9,7 +9,7 @@ import * as moment from "moment";
   providedIn: "root"
 })
 export class CustomerCareService {
-  private branchesupdated = new ReplaySubject<Array<string>>();
+  private branchesupdated = new ReplaySubject<Array<string>>(1);
   private dateRange;
   branchesChanged$ = this.branchesupdated.asObservable();
 

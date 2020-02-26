@@ -19,8 +19,8 @@ export class CustomerCareService {
     return this.httpClient
       .get(environment.api + "centers", {
         params: {
-          from: this.getDate().begin,
-          to: this.getDate().end
+          date_init: this.getDate().begin,
+          date_end: this.getDate().end
         }
       })
       .toPromise();

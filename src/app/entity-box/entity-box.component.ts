@@ -18,9 +18,6 @@ export class EntityBoxComponent {
   set data(data: Array<Branch>) {
     this.selection = new SelectionModel<any>(false, []);
     this.dataSource.data = data;
-    if (data.length) {
-      this.selectedItem(data[0]);
-    }
   }
 
   subscription: Subscription;
@@ -36,7 +33,9 @@ export class EntityBoxComponent {
     this.selection.toggle(element);
     this.selected.emit({
       entityName: element.name,
-      entity: element.id,
+      entity: this.selection.selected.map(entity => {
+        return entity.id;
+      }),
       date: this.customerService.getDate()
     });
   }

@@ -24,7 +24,6 @@
                 { type: 'string', role: 'style' },
                 { type: 'string', role: 'tooltip', p: { html: true } }
               ]"
-            
             ></google-chart>
           </div>
         </div>
@@ -50,7 +49,6 @@
                   'Calificación',
                   'Número de menciones'
                 ]"
-              
                 [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
                 [formatter]="formatter"
               ></google-chart>
@@ -72,13 +70,20 @@
                   'Calificación',
                   'Número de menciones'
                 ]"
-              
                 [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
                 [formatter]="formatter"
               ></google-chart>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12">
+      <div class="d-flex kt-portlet p-3  kt-portlet--border-bottom-brand p-5">
+        <h5 class="d-flex justify-content-center">
+          No se encontraron resultados relacionados con la búsqueda
+        </h5>
       </div>
     </div>
   </div>

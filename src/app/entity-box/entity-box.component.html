@@ -6,33 +6,37 @@
       placeholder="Buscar"
     />
   </mat-form-field>
-<div  id="box-container">
-    <mat-radio-group >
-    <table mat-table [dataSource]="dataSource" class=" w-100">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Entidad</th>
+  <div id="box-container">
+    <mat-radio-group *ngIf="dataSource.data.length">
+      <table mat-table [dataSource]="dataSource" class=" w-100">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Entidad</th>
 
-        <td mat-cell *matCellDef="let row">
-          <mat-radio-button
-            [value]="row.name"
-            (click)="$event.stopPropagation()"
-            (change)="$event ? selectedItem(row) : null"
-            [checked]="selection.isSelected(row)"
-          >
-          </mat-radio-button
-          >{{ row.name }}
-        </td>
-      </ng-container>
+          <td mat-cell *matCellDef="let row">
+            <mat-radio-button
+              [value]="row.name"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? selectedItem(row) : null"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-radio-button
+            >{{ row.name }}
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef># de menciones</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.amount }}
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="['name', 'amount']; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['name', 'amount']"></tr></table
-  ></mat-radio-group>
-</div>
-
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef># de menciones</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.amount }}
+          </td>
+        </ng-container>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['name', 'amount']; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: ['name', 'amount']"></tr>
+      </table>
+    </mat-radio-group>
+    <span *ngIf="!dataSource.data.length">No se encontraron resultados de búsqueda</span>
+  </div>
 </div>

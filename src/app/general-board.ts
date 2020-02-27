@@ -7,7 +7,7 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
   loading = true;
-  centers: Array<any>;
+  centers: string;
   
   constructor(protected customerService: CustomerCareService) {}
 

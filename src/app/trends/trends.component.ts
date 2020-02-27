@@ -67,9 +67,15 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
           return element;
         });
         this.loading = false;
-      });
+      }, error=> {
+        
+      } );
   }
 
+  /**
+   * 
+   * @param elements 
+   */
   setScatterChartStyle(elements) {
     return elements.map((element: Array<any>) => {
       const name: string = element.splice(0, 1)[0];

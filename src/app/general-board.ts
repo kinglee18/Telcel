@@ -1,14 +1,14 @@
 import { Subscription } from "rxjs";
 import { CustomerCareService } from "./customer-care.service";
 import { Board } from "./board";
-import { AfterViewInit, OnDestroy } from "@angular/core";
+import { AfterViewInit, OnDestroy, OnInit } from "@angular/core";
 
 export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
   loading = true;
   centers: string;
-  
+
   constructor(protected customerService: CustomerCareService) {}
 
   ngAfterViewInit() {

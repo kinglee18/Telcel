@@ -33,13 +33,13 @@ export class CommentsService {
     });
   }
 
-  getEntitiesScores(centers, date, entity) {
+  getEntitiesScores(centers, date, entity?) {
     return this.httpClient.get(environment.api + "comments/entities/scores", {
       params: { centers, date_init: date.begin, date_end: date.end, entity }
     });
   }
 
-  getComments(centers, date, entity): Observable<any> {
+  getComments(centers, date, entity?): Observable<any> {
     return this.httpClient.get(environment.api + "comments/list", {
       params: { centers, date_init: date.begin, date_end: date.end, entity }
     });

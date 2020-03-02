@@ -39,4 +39,16 @@ export class EntityBoxComponent {
       date: this.customerService.getDate()
     });
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.selected.emit({
+        entityName: null,
+        entity: this.selection.selected.map(entity => {
+          return entity.id;
+        }),
+        date: this.customerService.getDate()
+      });
+    }, 140);
+  }
 }

@@ -1,14 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { GeneralBoard } from "../general-board";
 import { CustomerCareService } from "../customer-care.service";
 import { CommentsService } from "../comments.service";
-import { MatTableDataSource } from "@angular/material";
+import { MatTableDataSource, MatPaginator } from "@angular/material";
 @Component({
   selector: "app-coments",
   templateUrl: "./coments.component.html",
   styleUrls: ["./coments.component.scss"]
 })
 export class ComentsComponent extends GeneralBoard {
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   commentsLoader = true;
   entities: Array<any> = [];
   dataSource = new MatTableDataSource([]);
@@ -37,12 +38,16 @@ export class ComentsComponent extends GeneralBoard {
     this.commentsService
       .getComments(this.centers, date, entity)
       .subscribe(data => {
-        this.dataSource = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
         this.commentsLoader = false;
       });
   }
 
   highlightComment(comment: string): string {
+    if (!this.entityName) {
+      return comment;
+    }
     const position = this.normalizedComment(comment).search(
       this.normalizedComment(this.entityName)
     );
@@ -51,12 +56,16 @@ export class ComentsComponent extends GeneralBoard {
           position,
           position + this.entityName.length
         )}</b>${comment.slice(
-          position + this.entityName.length, comment.length
+          position + this.entityName.length,
+          comment.length
         )}`
       : comment;
   }
 
   normalizedComment(comment: string): string {
-    return comment.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return comment
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
   }
 }

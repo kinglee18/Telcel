@@ -41,7 +41,7 @@ export class AppComponent {
     });
     this.dateRange.setValue({
       begin: moment()
-        .subtract(30, "d")
+        .subtract(3, "M")
         .toISOString(),
       end: moment().toISOString()
     });

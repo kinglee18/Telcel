@@ -2,7 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ReplaySubject, Subject } from "rxjs";
 import { MatSelect } from "@angular/material";
-import { take, takeUntil } from "rxjs/operators";
+import { take, takeUntil, debounceTime } from "rxjs/operators";
 
 import * as moment from "moment";
 import { CustomerCareService } from '../customer-care.service';
@@ -52,7 +52,7 @@ export class DashboardComponent {
         this.filterBranchesMulti();
       });
     this.branchMultiCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
+      .pipe(takeUntil(this._onDestroy), debounceTime (200))
       .subscribe((data: Array<any>) => {
         this.customerService.selectBranches(data);
         this.toggleAllCheckboxChecked =

@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { GeneralBoard } from "../general-board";
 import { CustomerCareService } from "../customer-care.service";
 import { CommentsService } from "../comments.service";
-import { MatTableDataSource, MatPaginator } from "@angular/material";
+import { MatTableDataSource, MatPaginator, MatDialog } from "@angular/material";
+import { ReviewDialogComponent } from "../review-dialog/review-dialog.component";
 @Component({
   selector: "app-coments",
   templateUrl: "./coments.component.html",
@@ -17,7 +18,8 @@ export class ComentsComponent extends GeneralBoard {
 
   constructor(
     customerService: CustomerCareService,
-    private commentsService: CommentsService
+    private commentsService: CommentsService,
+    private dialog: MatDialog
   ) {
     super(customerService);
   }
@@ -67,5 +69,15 @@ export class ComentsComponent extends GeneralBoard {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase();
+  }
+
+  reply(reviewId: string, comment: string): void {
+    this.commentsService.replyReview(reviewId, comment).subscribe();
+  }
+
+  openDialog(review) {
+    this.dialog.open(ReviewDialogComponent, {
+      data: { review }
+    });
   }
 }

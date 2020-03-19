@@ -1,0 +1,25 @@
+
+      #cdk-overlay-0 {
+        top: 32% !important;
+      }
+      
+      .kt-header__brand {
+        background-color: white;
+      }
+      
+      .kt-menu__nav {
+        li.active i {
+          color: #22b9ff !important;
+        }
+      }
+      
+      mat-option:hover span {
+        color: red;
+        display: inline;
+        right: 0;
+      }
+      
+      mat-option span {
+        display: none;
+      }
+      

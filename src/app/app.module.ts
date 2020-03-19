@@ -14,10 +14,13 @@ import { ComentsComponent } from './coments/coments.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EntityBoxComponent } from './entity-box/entity-box.component';
 import { LoadingDirective } from './loading.directive';
 import { LoaderComponent } from './loader/loader.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { RequestInterceptor } from './request-interceptor';
 
 @NgModule({
   entryComponents: [LoaderComponent],
@@ -29,7 +32,9 @@ import { LoaderComponent } from './loader/loader.component';
     ComentsComponent,
     EntityBoxComponent,
     LoadingDirective,
-    LoaderComponent
+    LoaderComponent,
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,13 @@ import { LoaderComponent } from './loader/loader.component';
     SatNativeDateModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,11 +15,11 @@ export class AuthService implements OnDestroy {
   login({ email, password }) {
     return new Observable(observer => {
       this.http
-        .post(environment.api + "login", { email, password })
+        .post(environment.api + "auth", { username: email, password })
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(
           data => {
-            this.saveToken(data["token"]);
+            this.saveToken(data["access_token"]);
             observer.next();
           },
           error => {
@@ -31,8 +31,10 @@ export class AuthService implements OnDestroy {
 
   logout(): Observable<any> {
     return new Observable(observer => {
-      this.http
-        .delete(environment.api + "login")
+      localStorage.removeItem("token");
+      observer.next();
+/*       this.http
+        .delete(environment.api + "auth")
         .pipe(takeUntil(this.unsubscribe$))
         .subscribe(
           data => {
@@ -42,7 +44,7 @@ export class AuthService implements OnDestroy {
           error => {
             observer.error(error);
           }
-        );
+        ); */
     });
   }
 

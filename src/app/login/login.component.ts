@@ -32,12 +32,17 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigate(["/activity"]);
         },
         error => {
-          if(error.status === 401) {
+          if (error.status === 401) {
             this.loginError = true;
+          } else {
+            alert("Intente mas tarde");
           }
-          alert("Intente mas tarde")
         }
       );
+  }
+
+  clearErrorMessage() {
+    this.loginError = false;
   }
 
   ngOnDestroy() {

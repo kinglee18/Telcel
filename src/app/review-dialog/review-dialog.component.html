@@ -8,7 +8,7 @@
       rows="10"
       placeholder="Escribe una respuesta..."
       required
-      minlength="4"
+      minlength="10"
       name="answer"
       [(ngModel)]="model.answer"
       #answer="ngModel"
@@ -24,7 +24,6 @@
     mat-button
     mat-raised-button
     color="primary"
-    [mat-dialog-close]="true"
     cdkFocusInitial
     (click)="submitReply()"
     [disabled]="answer.invalid"

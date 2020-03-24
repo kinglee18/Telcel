@@ -1,19 +1,49 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Observable, Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
+  private unsubscribe$ = new Subject<void>();
+
   constructor(private http: HttpClient) {}
 
   login({ email, password }) {
-    return this.http.post(environment.api, { email, password });
+    return new Observable(observer => {
+      this.http
+        .post(environment.api + "login", { email, password })
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(
+          data => {
+            this.saveToken(data["token"]);
+            observer.next();
+          },
+          error => {
+            observer.error(error);
+          }
+        );
+    });
   }
 
-  logout(): void {
-    localStorage.removeItem("token");
+  logout(): Observable<any> {
+    return new Observable(observer => {
+      this.http
+        .delete(environment.api + "login")
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(
+          data => {
+            localStorage.removeItem("token");
+            observer.next();
+          },
+          error => {
+            observer.error(error);
+          }
+        );
+    });
   }
 
   isLoggedIn(): boolean {
@@ -27,5 +57,10 @@ export class AuthService {
 
   saveToken(token: string): void {
     localStorage.setItem("token", token);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

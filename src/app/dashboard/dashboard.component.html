@@ -115,9 +115,8 @@
             <img src="../assets/telcel.svg" alt="" />
           </div>
         </div>
-        <h3 class="kt-header__title kt-grid__item w-50">
-          Comentarios CAC Telcel | Sentiment Analysis | Machine Learning [ ADN
-          Sección Amarilla ]
+        <h3 class="kt-header__title kt-grid__item w-10">
+          Comentarios CAC Telcel 
         </h3>
 
         <div
@@ -125,8 +124,8 @@
           id="kt_header_menu_wrapper"
           style="opacity: 1;"
         >
-          <div class="row">
-            <div class="col-md-6">
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-3">
               <mat-form-field class="mt-3">
                 <mat-select
                   [formControl]="branchMultiCtrl"
@@ -153,20 +152,20 @@
                     id="cac-search-box"
                     [showToggleAllCheckbox]="true"
                     [toggleAllCheckboxChecked]="toggleAllCheckboxChecked"
-                    (toggleAll)="toggleSelectAll($event)"
+                    (toggleAll)="toggleBranches($event)"
                     [formControl]="branchMultiFilterCtrl"
                     [placeholderLabel]="'Buscar'"
                     [noEntriesFoundLabel]="'No se encontraron resultados'"
                   ></ngx-mat-select-search>
                   <mat-option
-                    *ngFor="let branch of filteredBranchesMulti | async"
+                    *ngFor="let branch of filteredBranches | async"
                     [value]="branch"
                   >
                     <div class="row">
                       <div class="col-md-9">{{ branch.name }}</div>
                       <span
                         class="col-md-3"
-                        (click)="selectOnlyOne($event, branch)"
+                        (click)="branchSingleSelection($event, branch)"
                         >Elegir</span
                       >
                     </div>
@@ -174,7 +173,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
               <mat-form-field class="mt-3">
                 <input
                   matInput
@@ -188,6 +187,14 @@
                   [for]="picker2"
                 ></sat-datepicker-toggle>
               </mat-form-field>
+            </div>
+            <div class="col-md-1">
+              <i
+                (click)="closeSession()"
+                class="fa fa-sign-out mt-4"
+                [matTooltipPosition]="'left'"
+                matTooltip="Cerrar sesión"
+              ></i>
             </div>
           </div>
         </div>

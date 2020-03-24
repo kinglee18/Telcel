@@ -12,9 +12,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { of, Observable } from "rxjs";
 import { SatDatepickerModule, SatNativeDateModule } from "saturn-datepicker";
 import { timeout } from "rxjs/operators";
-import { DashboardComponent } from './dashboard.component';
-import { CustomMaterialModule } from '../material.module';
-import { CustomerCareService } from '../customer-care.service';
+import { DashboardComponent } from "./dashboard.component";
+import { CustomMaterialModule } from "../material.module";
+import { CustomerCareService } from "../customer-care.service";
+import { authServiceStub } from '../login/login.component.spec';
+import { AuthService } from '../auth.service';
 
 export class CustomerCareServiceStub {
   branchesChanged$ = new Observable();
@@ -52,7 +54,8 @@ describe("DashboardComponent", () => {
         {
           provide: CustomerCareService,
           useValue: new CustomerCareServiceStub()
-        }
+        },
+        { provide: AuthService, useValue: authServiceStub }
       ],
       declarations: [DashboardComponent]
     });

@@ -6,16 +6,16 @@ import {
   fakeAsync,
   tick
 } from "@angular/core/testing";
-import {Location} from "@angular/common";
+import { Location } from "@angular/common";
 import { LoginComponent } from "./login.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CustomMaterialModule } from "../material.module";
 import { AuthService } from "../auth.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
-import { of, Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { of, Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { Component } from "@angular/core";
 
 export class authServiceStub {
   login(): Observable<any> {
@@ -23,7 +23,7 @@ export class authServiceStub {
   }
 }
 
-let routerSpy = {navigate: jasmine.createSpy('navigate')};
+let routerSpy = { navigate: jasmine.createSpy("navigate") };
 
 describe("LoginComponent", () => {
   let component: LoginComponent;
@@ -38,13 +38,16 @@ describe("LoginComponent", () => {
         CustomMaterialModule,
         BrowserAnimationsModule
       ],
-      providers: [{ provide: AuthService, useValue: authServiceStub },{provide: Router, useValue: routerSpy}]
+      providers: [
+        { provide: AuthService, useValue: authServiceStub },
+        { provide: Router, useValue: routerSpy }
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     router = TestBed.get(Router);
-    
+
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
   });
@@ -58,21 +61,20 @@ describe("LoginComponent", () => {
     expect(component.loginForm.valid).toBeFalsy();
   });
 
-  it("should validate the form and redirectTo the dashboard ", fakeAsync(()=> {
-  
+  it("should validate the form and redirectTo the dashboard ", fakeAsync(() => {
     fillForm();
     tick();
-    
+
     expect(component.loginForm.valid).toBeTruthy();
-   // expect (routerSpy.navigate).toHaveBeenCalledWith(['/activity']);
+    // expect (routerSpy.navigate).toHaveBeenCalledWith(['/activity']);
   }));
-  
-  it("show an error for not allowed users", ()=> {
+
+  it("show an error for not allowed users", () => {
     fillForm();
     expect(component.loginForm.valid).toBeTruthy();
   });
 
-  function fillForm(email = 'king@hotmail.com') {
+  function fillForm(email = "king@hotmail.com") {
     fixture.detectChanges();
     const emailEl = fixture.debugElement.nativeElement.querySelector("#email");
     emailEl.value = email;

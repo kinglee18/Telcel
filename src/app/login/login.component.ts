@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           this.loginError = false;
-          this.authService.saveToken(data["token"]);
           this.router.navigate(["/activity"]);
         },
         error => {

@@ -15,6 +15,9 @@ export class CustomerCareService {
 
   constructor(private httpClient: HttpClient) {}
 
+  /**
+   * @description - request all branches from server according to the submitted date range
+   */
   getCenters(): Promise<object> {
     return this.httpClient
       .get(environment.api + "centers", {
@@ -26,6 +29,12 @@ export class CustomerCareService {
       .toPromise();
   }
 
+  /**
+   *
+   * @param branches - a list of the provided branches in selection input
+   * @description - update the branches in the observable to make then
+   * available from any component
+   */
   selectBranches(branches: Array<Branch>): void {
     this.branchesupdated.next(
       branches.map(ele => {
@@ -34,6 +43,11 @@ export class CustomerCareService {
     );
   }
 
+  /**
+   *
+   * @param range - date range from the selection input
+   * @description - transform the selected input into an object with moment format
+   */
   setDateRange(range: any): void {
     const newDate = {
       begin: moment(range.begin).format("DD/MM/YYYY"),
@@ -42,6 +56,9 @@ export class CustomerCareService {
     this.dateRange = newDate;
   }
 
+  /**
+   * @return selected date with moment format
+   */
   getDate(): any {
     return this.dateRange;
   }

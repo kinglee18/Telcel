@@ -9,6 +9,7 @@ import { CustomerCareService } from "../customer-care.service";
 import { Branch } from "../branch";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
+declare var KTLayout: any;
 
 @Component({
   selector: "app-dashboard",
@@ -147,5 +148,12 @@ export class DashboardComponent implements OnDestroy, OnInit {
         alert("No es posible cerrar sesión en este momento");
       }
     );
+  }
+
+  /**
+   * @description - triggers jquery onDocumentReady function to enable dom effects
+   */
+  ngAfterViewInit() {
+    KTLayout.init();
   }
 }

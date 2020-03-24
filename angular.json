@@ -31,6 +31,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "src/assets/scripts/jquery-3.4.1.min.js",
               "src/assets/scripts/vendors.bundle.js",
               "src/assets/scripts/scripts.bundle.js",
               "src/assets/scripts/dashboard.js"

@@ -44,4 +44,8 @@ export class CommentsService {
       params: { centers, date_init: date.begin, date_end: date.end, entity }
     });
   }
+
+  replyReview(reviewId, comment) : Observable<any> {
+    return this.httpClient.post(environment.api, {reviewId, comment});
+  }
 }

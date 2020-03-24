@@ -22,7 +22,8 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
     hAxis: { title: "Número de menciones" },
     vAxis: { title: "Puntaje de sentimiento" },
     tooltip: { isHtml: true },
-    legend: { position: "none" }
+    legend: { position: "none" },
+    explorer: { actions: ["dragToZoom", "rightClickToReset"] }
   };
 
   table1Columns: string[] = ["Entidad", "Puntuación"];
@@ -52,9 +53,8 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
   }
 
   showBoardInfo(centers, date) {
-    this.request = this.commentsService
-      .getBySentiment(centers, date)
-      .subscribe((data: any) => {
+    this.request = this.commentsService.getBySentiment(centers, date).subscribe(
+      (data: any) => {
         this.averageSentiment = this.setScatterChartStyle(
           data.averageSentiment
         );
@@ -67,14 +67,14 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
           return element;
         });
         this.loading = false;
-      }, error=> {
-        
-      } );
+      },
+      error => {}
+    );
   }
 
   /**
-   * 
-   * @param elements 
+   *
+   * @param elements
    */
   setScatterChartStyle(elements) {
     return elements.map((element: Array<any>) => {

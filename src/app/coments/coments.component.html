@@ -33,6 +33,7 @@
                     {{ element.date }}
                   </td>
                 </ng-container>
+
                 <ng-container matColumnDef="comment">
                   <th mat-header-cell *matHeaderCellDef>Comentario</th>
                   <td mat-cell *matCellDef="let element">
@@ -41,17 +42,31 @@
                     ></span>
                   </td>
                 </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element">
+                    <button
+                      mat-button
+                      mat-raised-button
+                      color="accent"
+                      (click)="openDialog(element)"
+                    >Responder</button>
+                  </td>
+                </ng-container>
                 <tr
                   mat-header-row
-                  *matHeaderRowDef="['date', 'comment']; sticky: true"
+                  *matHeaderRowDef="['date', 'comment', 'action']; sticky: true"
                 ></tr>
                 <tr
                   mat-row
-                  *matRowDef="let row; columns: ['date', 'comment']"
+                  *matRowDef="let row; columns: ['date', 'comment', 'action']"
                 ></tr>
               </table>
             </div>
-            <mat-paginator [pageSizeOptions]="[5,10, 20]" showFirstLastButtons></mat-paginator>
+            <mat-paginator
+              [pageSizeOptions]="[5, 10, 20]"
+              showFirstLastButtons
+            ></mat-paginator>
           </div>
         </div>
       </div>

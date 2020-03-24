@@ -15,7 +15,9 @@ import {
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatRadioModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule,
+  MatTooltipModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import {
@@ -48,6 +50,8 @@ const list = [
   MatSidenavModule,
   MatRadioModule,
   SatDatepickerModule,
+  MatDialogModule,
+  MatTooltipModule
 ];
 
 export const MY_FORMATS = {

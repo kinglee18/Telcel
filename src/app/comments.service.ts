@@ -46,6 +46,6 @@ export class CommentsService {
   }
 
   replyReview(reviewId, comment) : Observable<any> {
-    return this.httpClient.post(environment.api, {reviewId, comment});
+    return this.httpClient.post(environment.api + 'reply', {reviewId, comment});
   }
 }

@@ -16,13 +16,9 @@ declare var KTLayout: any;
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
-export class DashboardComponent implements OnDestroy, OnInit {
-  constructor(
-    private customerService: CustomerCareService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-  protected branches: Branch[] = [];
+export class DashboardComponent implements OnDestroy {
+
+    protected branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
   public dateRange: FormControl = new FormControl(moment());
   public branchMultiFilterCtrl: FormControl = new FormControl();
@@ -37,7 +33,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
    * @description - set all subscriptions to listen for events in DOM and
    * retrieves branches from server
    */
-  ngOnInit() {
+  constructor(
+    private customerService: CustomerCareService,
+    private authService: AuthService,
+    private router: Router
+  ){
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
       this.customerService

@@ -2,8 +2,15 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { GeneralBoard } from "../general-board";
 import { CustomerCareService } from "../customer-care.service";
 import { CommentsService } from "../comments.service";
-import { MatTableDataSource, MatPaginator, MatDialog } from "@angular/material";
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatDialog,
+  MatSort,
+  MatSnackBar
+} from "@angular/material";
 import { ReviewDialogComponent } from "../review-dialog/review-dialog.component";
+
 @Component({
   selector: "app-coments",
   templateUrl: "./coments.component.html",
@@ -11,18 +18,21 @@ import { ReviewDialogComponent } from "../review-dialog/review-dialog.component"
 })
 export class ComentsComponent extends GeneralBoard {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   commentsLoader = true;
   entities: Array<any> = [];
-  dataSource = new MatTableDataSource([]);
   entityName: string;
+  dataSource = new MatTableDataSource();
 
   constructor(
     customerService: CustomerCareService,
     private commentsService: CommentsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     super(customerService);
   }
+
 
   showBoardInfo(centers, date) {
     this.commentsLoader = true;
@@ -42,6 +52,7 @@ export class ComentsComponent extends GeneralBoard {
       .subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         this.commentsLoader = false;
       });
   }
@@ -71,13 +82,18 @@ export class ComentsComponent extends GeneralBoard {
       .toLowerCase();
   }
 
-  reply(reviewId: string, comment: string): void {
-    this.commentsService.replyReview(reviewId, comment).subscribe();
-  }
-
   openDialog(review) {
-    this.dialog.open(ReviewDialogComponent, {
-      data: { review }
-    });
+    this.dialog
+      .open(ReviewDialogComponent, {
+        data: { review }
+      })
+      .afterClosed()
+      .subscribe(comment => {
+        if (comment) {
+          this.snackBar.open("El comentario ha sido respondido", null, {
+            duration: 2000
+          });
+        }
+      });
   }
 }

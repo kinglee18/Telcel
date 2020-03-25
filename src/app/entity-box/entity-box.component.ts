@@ -49,6 +49,6 @@ export class EntityBoxComponent {
         }),
         date: this.customerService.getDate()
       });
-    }, 140);
+    }, 1000);
   }
 }

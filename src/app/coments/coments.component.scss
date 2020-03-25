@@ -1,13 +1,14 @@
 table {
-/*   height: 300px;
-  td {
-    padding: 10px;
-  } */
-  width:100%
+  tr > td:nth-child(3) {
+    text-align-last: right;
+    width: 10%;
+  }
+  tr > td:nth-child(1) {
+    width: 15%;
+  }
 }
 
-
 #table-container {
-    overflow: auto;
-    height: 400px;
+  overflow: auto;
+  height: 400px;
 }

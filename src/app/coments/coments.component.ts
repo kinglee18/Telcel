@@ -33,7 +33,6 @@ export class ComentsComponent extends GeneralBoard {
     super(customerService);
   }
 
-
   showBoardInfo(centers, date) {
     this.commentsLoader = true;
     this.request = this.commentsService
@@ -44,8 +43,10 @@ export class ComentsComponent extends GeneralBoard {
       });
   }
 
-  selectedEntity({ date, entity, entityName }) {
-    this.entityName = entityName;
+  selectedEntity({ date, entity }) {
+    if( entity) {
+          this.entityName = entity.name;
+    }
     this.commentsLoader = true;
     this.commentsService
       .getComments(this.centers, date, entity)
@@ -58,21 +59,23 @@ export class ComentsComponent extends GeneralBoard {
   }
 
   highlightComment(comment: string): string {
-    if (!this.entityName) {
-      return comment;
-    }
-    const position = this.normalizedComment(comment).search(
-      this.normalizedComment(this.entityName)
-    );
-    return position > -1
-      ? `${comment.slice(0, position)}<b>${comment.slice(
+    const entityList = this.entityName
+      ? [this.entityName]
+      : this.entities.map(el => {
+          return el.name;
+        });
+    for (const keyword of entityList) {
+      const position = this.normalizedComment(comment).search(
+        this.normalizedComment(keyword)
+      );
+      if (position > -1) {
+        return `${comment.slice(0, position)}<b>${comment.slice(
           position,
-          position + this.entityName.length
-        )}</b>${comment.slice(
-          position + this.entityName.length,
-          comment.length
-        )}`
-      : comment;
+          position + keyword.length
+        )}</b>${comment.slice(position + keyword.length, comment.length)}`;
+      }
+    }
+    return comment;
   }
 
   normalizedComment(comment: string): string {

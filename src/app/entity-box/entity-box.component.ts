@@ -32,10 +32,7 @@ export class EntityBoxComponent {
   selectedItem(element) {
     this.selection.toggle(element);
     this.selected.emit({
-      entityName: element.name,
-      entity: this.selection.selected.map(entity => {
-        return entity.id;
-      }),
+      entity: this.selection.selected[0],
       date: this.customerService.getDate()
     });
   }
@@ -43,10 +40,7 @@ export class EntityBoxComponent {
   ngAfterViewInit() {
     setTimeout(() => {
       this.selected.emit({
-        entityName: null,
-        entity: this.selection.selected.map(entity => {
-          return entity.id;
-        }),
+        entity: this.selection.selected[0],
         date: this.customerService.getDate()
       });
     }, 1000);

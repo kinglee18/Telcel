@@ -34,18 +34,30 @@ export class CommentsService {
   }
 
   getEntitiesScores(centers, date, entity?) {
+    let params: any = { centers, date_init: date.begin, date_end: date.end };
+    if (entity) {
+      params.entity = entity.id;
+    }
+
     return this.httpClient.get(environment.api + "comments/entities/scores", {
-      params: { centers, date_init: date.begin, date_end: date.end, entity }
+      params
     });
   }
 
   getComments(centers, date, entity?): Observable<any> {
+    let params: any = { centers, date_init: date.begin, date_end: date.end };
+    if (entity) {
+      params.entity = entity.id;
+    }
     return this.httpClient.get(environment.api + "comments/list", {
-      params: { centers, date_init: date.begin, date_end: date.end, entity }
+      params
     });
   }
 
-  replyReview(reviewId, comment) : Observable<any> {
-    return this.httpClient.post(environment.api + 'reply', {reviewId, comment});
+  replyReview(reviewId, comment): Observable<any> {
+    return this.httpClient.put(environment.api + "reply", {
+      reviewId,
+      comment
+    });
   }
 }

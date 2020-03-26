@@ -23,8 +23,9 @@ export class ReviewDialogComponent implements OnInit {
       .replyReview(this.data.review.id, this.model.comment)
       .subscribe(
         data => {
+          this.data.review.answered = true;
           alert("El comentario ha sido enviado");
-          this.dialogRef.close();
+          this.dialogRef.close(this.data.review);
         },
         error => {
           alert("No es posible realizar esta accion en este momento");

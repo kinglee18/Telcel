@@ -9,6 +9,7 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <div class="row"></div>
             <app-entity-box
+              *ngIf="entities.length"
               (selected)="selectedEntity($event)"
               [loading]="loading"
               [data]="entities"
@@ -29,9 +30,9 @@
                 class="w-100"
               >
                 <ng-container matColumnDef="date">
-                  <th mat-header-cell *matHeaderCellDef >Fecha</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
                   <td mat-cell *matCellDef="let element" >
-                    {{ element.date }}
+                    {{ element.date | date: 'dd/MM/yyyy' }}
                   </td>
                 </ng-container>
 

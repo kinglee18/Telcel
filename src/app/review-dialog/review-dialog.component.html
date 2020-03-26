@@ -2,17 +2,18 @@
 
 <mat-dialog-content class="mat-typography">
   <div class="d-flex flex-column">
-    <p>{{ data.review.comment }}</p>
+    <p *ngIf="review">{{ review.comment }}</p>
     <textarea
       cols="30"
       rows="10"
       placeholder="Escribe una respuesta..."
       required
-      minlength="10"
+      minlength="5"
       name="answer"
       [(ngModel)]="model.answer"
       #answer="ngModel"
       required
+      id="answer"
     ></textarea>
   </div>
 </mat-dialog-content>
@@ -27,6 +28,7 @@
     cdkFocusInitial
     (click)="submitReply()"
     [disabled]="answer.invalid"
+    id="submit"
   >
     Contestar
   </button>

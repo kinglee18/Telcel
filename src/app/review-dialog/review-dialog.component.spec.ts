@@ -4,9 +4,13 @@ import { ReviewDialogComponent } from "./review-dialog.component";
 import { FormsModule } from "@angular/forms";
 import { CustomMaterialModule } from "../material.module";
 import { CommentsService } from "../comments.service";
-import { commentsServiceStub } from "../activity/activity.component.spec";
-import { MAT_DIALOG_DATA } from "@angular/material";
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { of } from 'rxjs';
+
+export class CommentsServiceStub{
+  replyReview(id, comment){return of({})}
+}
 
 describe("ReviewDialogComponent", () => {
   let component: ReviewDialogComponent;
@@ -16,10 +20,10 @@ describe("ReviewDialogComponent", () => {
     TestBed.configureTestingModule({
       declarations: [ReviewDialogComponent],
       imports: [FormsModule, CustomMaterialModule],
-
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: CommentsService, useValue: commentsServiceStub }
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {review:{id:2}} },
+        { provide: CommentsService, useValue: CommentsServiceStub }
       ]
     }).compileComponents();
   }));
@@ -32,5 +36,16 @@ describe("ReviewDialogComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should enable form and submit data", () => {
+    const answerEl = fixture.debugElement.nativeElement.querySelector('#answer');
+    answerEl.value = "Comentario de evaluacion";
+    answerEl.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    const submitBtn = fixture.debugElement.nativeElement.querySelector('#submit');
+    submitBtn.dispatchEvent(new Event('click'));
+    expect(submitBtn.disabled).toBeFalsy();
+    
   });
 });

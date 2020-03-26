@@ -9,7 +9,7 @@ import { Router } from "@angular/router";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"]
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements  OnDestroy {
   loginForm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required])
@@ -18,10 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginRequest: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit() {
-    console.log(this.loginForm.get("email").hasError("email"));
-  }
 
   onSubmit() {
     this.loginRequest = this.authService

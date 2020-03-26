@@ -55,7 +55,7 @@ export class CommentsService {
   }
 
   replyReview(reviewId, comment): Observable<any> {
-    return this.httpClient.put(environment.api + "reply", {
+    return this.httpClient.put(environment.api + "answer", {
       reviewId,
       comment
     });

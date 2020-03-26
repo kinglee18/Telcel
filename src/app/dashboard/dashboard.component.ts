@@ -17,8 +17,8 @@ declare var KTLayout: any;
   styleUrls: ["./dashboard.component.scss"]
 })
 export class DashboardComponent implements OnDestroy {
-
-    protected branches: Branch[] = [];
+  maxDate = new Date();
+  protected branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
   public dateRange: FormControl = new FormControl(moment());
   public branchMultiFilterCtrl: FormControl = new FormControl();
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnDestroy {
     private customerService: CustomerCareService,
     private authService: AuthService,
     private router: Router
-  ){
+  ) {
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
       this.customerService
@@ -154,6 +154,6 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-    KTLayout.init();
+   /*  KTLayout.init(); */
   }
 }

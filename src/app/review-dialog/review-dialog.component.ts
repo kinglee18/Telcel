@@ -7,20 +7,21 @@ import { CommentsService } from "../comments.service";
   templateUrl: "./review-dialog.component.html",
   styleUrls: ["./review-dialog.component.scss"]
 })
-export class ReviewDialogComponent implements OnInit {
+export class ReviewDialogComponent {
+  review: any;
+  model: any = {};
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private commentsService: CommentsService,
     private dialogRef: MatDialogRef<ReviewDialogComponent>
-  ) {}
-  model: any = {};
-  ngOnInit() {
-    console.log(this.data);
+  ) {
+    this.review = this.data.review;
   }
 
   submitReply() {
     this.commentsService
-      .replyReview(this.data.review.id, this.model.comment)
+      .replyReview(this.data.review.id, this.model.answer)
       .subscribe(
         data => {
           this.data.review.answered = true;

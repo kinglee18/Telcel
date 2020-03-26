@@ -11,6 +11,10 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
 
   constructor(protected customerService: CustomerCareService) {}
 
+  /**
+   * @description - listnes to the branches selector and set some variables 
+   * to inherit to its child clases
+   */
   ngAfterViewInit() {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
@@ -20,9 +24,19 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
       }
     );
   }
+
+  /**
+   * 
+   * @param centers - selected branches in the dashboard
+   * @param date - selected date in the dashboard
+   */
   showBoardInfo(centers, date) {
     throw new Error("Method not implemented.");
   }
+
+  /**
+   * @description prevents memory leaks
+   */
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.request.unsubscribe();

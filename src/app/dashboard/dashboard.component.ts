@@ -93,7 +93,7 @@ export class DashboardComponent implements OnDestroy {
   toggleBranches(selectAllValue: boolean) {
     this.toggleAllCheckboxChecked = selectAllValue;
     this.filteredBranches
-      .pipe(take(1), takeUntil(this._onDestroy))
+      .pipe(take(1))
       .subscribe(val => {
         if (selectAllValue) {
           this.branchMultiCtrl.patchValue(val);
@@ -111,7 +111,6 @@ export class DashboardComponent implements OnDestroy {
    */
   branchSingleSelection($event: any, branch): void {
     $event.stopPropagation();
-    this.toggleBranches(false);
     this.branchMultiCtrl.patchValue([branch]);
   }
 

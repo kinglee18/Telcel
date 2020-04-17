@@ -32,10 +32,15 @@
                 <ng-container matColumnDef="date">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
                   <td mat-cell *matCellDef="let element" >
-                    {{ element.date | date: 'dd/MM/yyyy' }}
+                    {{ element.date }}
                   </td>
                 </ng-container>
-
+                <ng-container matColumnDef="cac">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>CAC</th>
+                  <td mat-cell *matCellDef="let element" >
+                    {{ element.cac}}
+                  </td>
+                </ng-container>
                 <ng-container matColumnDef="comment" class="d-flex justify-content-center">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
                   <td mat-cell *matCellDef="let element" >
@@ -58,11 +63,11 @@
                 </ng-container>
                 <tr
                   mat-header-row
-                  *matHeaderRowDef="['date', 'comment', 'action']; sticky: true"
+                  *matHeaderRowDef="['date', 'cac', 'comment', 'action']; sticky: true"
                 ></tr>
                 <tr
                   mat-row
-                  *matRowDef="let row; columns: ['date', 'comment', 'action']"
+                  *matRowDef="let row; columns: ['date', 'cac', 'comment', 'action']"
                 ></tr>
               </table>
             </div>

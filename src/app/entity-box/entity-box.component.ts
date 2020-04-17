@@ -18,6 +18,7 @@ export class EntityBoxComponent {
   set data(data: Array<Branch>) {
     this.selection = new SelectionModel<any>(false, []);
     this.dataSource.data = data;
+    this.triggerSelection();
   }
 
   subscription: Subscription;
@@ -37,7 +38,7 @@ export class EntityBoxComponent {
     });
   }
 
-  ngAfterViewInit() {
+  triggerSelection() {
     setTimeout(() => {
       this.selected.emit({
         entity: this.selection.selected[0],

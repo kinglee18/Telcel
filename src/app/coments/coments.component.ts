@@ -65,7 +65,8 @@ export class ComentsComponent extends GeneralBoard {
       .getComments(this.centers, date, entity)
       .subscribe(data => {
         data.map(element => {
-          element.date = moment(element.date).toDate();
+          moment.locale('es');
+          element.date = moment(element.date).format('DD/MMM/YYYY');
           return element;
         });
         this.dataSource = new MatTableDataSource(data);

@@ -28,6 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Docker deploy 
-Build  `docker build --rm -f "Dockerfile" -t cac:latest "."`
-Run `docker run --rm -d -p 8080:80/tcp --name cac_frontend cac:latest`
-Alternative `docker-compose up`
+Run `docker-compose build`
+RUN  `docker-compose up -d`

@@ -2,13 +2,13 @@ import { Component, ViewChild, OnDestroy, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ReplaySubject, Subject } from "rxjs";
 import { MatSelect } from "@angular/material";
-import { take, takeUntil, debounceTime } from "rxjs/operators";
+import { take, takeUntil, debounceTime, filter } from "rxjs/operators";
 
 import * as moment from "moment";
 import { CustomerCareService } from "../customer-care.service";
 import { Branch } from "../branch";
 import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
+import { Router, Event, NavigationEnd, NavigationStart } from "@angular/router";
 declare var KTLayout: any;
 
 @Component({
@@ -38,6 +38,25 @@ export class DashboardComponent implements OnDestroy {
     private authService: AuthService,
     private router: Router
   ) {
+
+    router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((val: NavigationEnd) => {
+        if (val.url === '/coments-reply') {
+          this.customerService.setDateRange(this.customerService.getDate);
+          this.customerService
+            .getCenters()
+            .then((centers: Array<any>) => {
+            console.log(9999);
+            
+            })
+            .catch(err => {
+              alert("No es posible consultar la información en este momento");
+            });
+        }
+      });
+
+
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.setDateRange(date);
       this.customerService
@@ -153,6 +172,6 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-   KTLayout.init();
+    KTLayout.init();
   }
 }

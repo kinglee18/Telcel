@@ -19,7 +19,8 @@ const routes: Routes = [
       { path: "activity", component: ActivityComponent },
       { path: "trends", component: TrendsComponent },
       { path: "entities-sentiment", component: EntitiesSentimentComponent },
-      { path: "coments", component: ComentsComponent }
+      { path: "coments", component: ComentsComponent },
+      { path: "coments-reply", component: ComentsComponent }
     ]
   }
 ];

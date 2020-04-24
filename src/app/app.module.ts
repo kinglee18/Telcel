@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RequestInterceptor } from './request-interceptor';
 import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
+import { PermissionsDirective } from './permissions.directive';
 
 @NgModule({
   entryComponents: [LoaderComponent, ReviewDialogComponent],
@@ -36,7 +37,8 @@ import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
     LoaderComponent,
     LoginComponent,
     DashboardComponent,
-    ReviewDialogComponent
+    ReviewDialogComponent,
+    PermissionsDirective
   ],
   imports: [
     BrowserModule,

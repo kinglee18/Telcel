@@ -54,6 +54,13 @@ export class CommentsService {
     });
   }
 
+  getAllComments(centers, date): Observable<any> {
+    const params: any = { centers, date_init: date.begin, date_end: date.end };
+    return this.httpClient.get(environment.api + "comments/all", {
+      params
+    });
+  }
+
   replyReview(reviewId, comment): Observable<any> {
     return this.httpClient.put(environment.api + "answer", {
       reviewId,

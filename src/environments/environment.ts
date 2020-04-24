@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'http://35.239.238.154/'
-  /* api: 'https://private-eeee39-cac.apiary-mock.com/' */
+ /*  api: 'http://35.239.238.154/' */
+   api: 'https://private-eeee39-cac.apiary-mock.com/' 
 };
 
 /*

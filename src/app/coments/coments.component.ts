@@ -5,11 +5,9 @@ import { CommentsService } from "../comments.service";
 import {
   MatTableDataSource,
   MatPaginator,
-  MatDialog,
   MatSort,
   MatSnackBar
 } from "@angular/material";
-import { ReviewDialogComponent } from "../review-dialog/review-dialog.component";
 import * as moment from "moment";
 
 @Component({
@@ -27,10 +25,7 @@ export class ComentsComponent extends GeneralBoard {
 
   constructor(
     customerService: CustomerCareService,
-    private commentsService: CommentsService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar
-  ) {
+    private commentsService: CommentsService) {
     super(customerService);
   }
 
@@ -87,8 +82,8 @@ export class ComentsComponent extends GeneralBoard {
     const entityList = this.entityName
       ? [this.entityName]
       : this.entities.map(el => {
-          return el.name;
-        });
+        return el.name;
+      });
     for (const keyword of entityList) {
       const position = this.normalizedComment(comment).search(
         this.normalizedComment(keyword)
@@ -113,20 +108,5 @@ export class ComentsComponent extends GeneralBoard {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase();
-  }
-
-  openDialog(review) {
-    this.dialog
-      .open(ReviewDialogComponent, {
-        data: { review }
-      })
-      .afterClosed()
-      .subscribe(comment => {
-        if (comment) {
-          this.snackBar.open("El comentario ha sido respondido", null, {
-            duration: 2000
-          });
-        }
-      });
   }
 }

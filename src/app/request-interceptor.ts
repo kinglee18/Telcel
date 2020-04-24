@@ -16,7 +16,7 @@ export class RequestInterceptor implements HttpInterceptor {
     
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.auth.getToken()}`
+        Authorization: `JWT ${this.auth.getToken()}`
       }
     });
     return next.handle(request);

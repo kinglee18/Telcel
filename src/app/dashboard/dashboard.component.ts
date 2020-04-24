@@ -8,7 +8,7 @@ import * as moment from "moment";
 import { CustomerCareService } from "../customer-care.service";
 import { Branch } from "../branch";
 import { AuthService } from "../auth.service";
-import { Router, Event, NavigationEnd, NavigationStart } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 declare var KTLayout: any;
 
 @Component({
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnDestroy {
   private toggleAllCheckboxChecked = false;
   protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
+  private allCenters: boolean;
 
   /**
    * @description - set all subscriptions to listen for events in DOM and
@@ -39,38 +40,13 @@ export class DashboardComponent implements OnDestroy {
     private router: Router
   ) {
 
-    router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((val: NavigationEnd) => {
-        if (val.url === '/coments-reply') {
-          this.customerService.setDateRange(this.customerService.getDate);
-          this.customerService
-            .getCenters()
-            .then((centers: Array<any>) => {
-            console.log(9999);
-            
-            })
-            .catch(err => {
-              alert("No es posible consultar la información en este momento");
-            });
-        }
-      });
-
-
+    this.verifyRoute();
     this.dateRange.valueChanges.subscribe(date => {
-      this.customerService.setDateRange(date);
-      this.customerService
-        .getCenters()
-        .then((centers: Array<any>) => {
-          this.branches = centers;
-          this.filteredBranches.next(centers.slice());
-          this.toggleBranches(true);
-        })
-        .catch(err => {
-          alert("No es posible consultar la información en este momento");
-        });
+      this.customerService.saveDateRange(date);
+      this.requestBranches();
     });
     this.setDefaultDate();
+
     this.branchMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
@@ -173,5 +149,30 @@ export class DashboardComponent implements OnDestroy {
    */
   ngAfterViewInit() {
     KTLayout.init();
+  }
+
+  verifyRoute() {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((val: NavigationEnd) => {
+        const state = val.url === '/coments-reply';
+        if (state !== this.allCenters){
+          this.requestBranches();
+        }
+        this.allCenters = state;
+      });
+  }
+
+  requestBranches() {
+    this.customerService
+      .getCenters(this.allCenters)
+      .then((centers: Array<any>) => {
+        this.branches = centers;
+        this.filteredBranches.next(centers.slice());
+        this.toggleBranches(true);
+      })
+      .catch(err => {
+        alert("No es posible consultar la información en este momento");
+      });
   }
 }

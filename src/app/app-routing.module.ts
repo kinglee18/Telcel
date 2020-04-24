@@ -7,6 +7,7 @@ import { ComentsComponent } from "./coments/coments.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
 import { LoginGuard } from './login.guard';
+import { CommentsReplyComponent } from './comments-reply/comments-reply.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "activity", pathMatch: "full" },
@@ -20,7 +21,7 @@ const routes: Routes = [
       { path: "trends", component: TrendsComponent },
       { path: "entities-sentiment", component: EntitiesSentimentComponent },
       { path: "coments", component: ComentsComponent },
-      { path: "coments-reply", component: ComentsComponent }
+      { path: "coments-reply", component: CommentsReplyComponent }
     ]
   }
 ];

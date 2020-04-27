@@ -7,7 +7,10 @@
       <div class="row">
         <div class="col-sm-11 col-md-11 col-lg-11">
           
-          <div>
+          <div
+          
+
+          >
             <h5>Texto completo de los comentarios</h5>
             <div id="table-container">
               <table
@@ -38,7 +41,7 @@
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="action">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header="reply" > Status</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header="reply" >Respuesta</th>
                   <td mat-cell *matCellDef="let element">
                     <button
                       *ngIf="!element.reply"
@@ -47,6 +50,13 @@
                       color="accent"
                       (click)="openDialog(element)"
                     >Responder</button>
+                    <span
+                    class="btn btn-success"
+                    *ngIf="element.reply"
+                    (click)="openDialog(element)"
+                    >
+                      Ver
+                    </span>
                   </td>
                 </ng-container>
                 <tr

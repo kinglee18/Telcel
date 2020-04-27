@@ -23,6 +23,7 @@
         >
           <ul class="kt-menu__nav ">
             <li
+              *hasPermission="['actividad_respuestas']"
               routerLinkActive="active"
               [routerLink]="['/activity']"
               class="kt-menu__item  kt-menu__item--submenu"
@@ -37,6 +38,7 @@
               >
             </li>
             <li
+              *hasPermission="['tendencias_sentimientos']"
               routerLinkActive="active"
               [routerLink]="['/trends']"
               class="kt-menu__item  kt-menu__item--submenu"
@@ -52,6 +54,7 @@
             </li>
 
             <li
+              *hasPermission="['detalles_sentimiento']"
               routerLinkActive="active"
               [routerLink]="['/entities-sentiment']"
               class="kt-menu__item  kt-menu__item--submenu"
@@ -67,6 +70,7 @@
             </li>
 
             <li
+              *hasPermission="['texto_completo']"
               routerLinkActive="active"
               [routerLink]="['/coments']"
               class="kt-menu__item  kt-menu__item--submenu"
@@ -81,6 +85,7 @@
               >
             </li>
             <li
+            *hasPermission="['texto_completo']"
             routerLinkActive="active"
             [routerLink]="['/coments-reply']"
             class="kt-menu__item  kt-menu__item--submenu"

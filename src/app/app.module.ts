@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { RequestInterceptor } from './request-interceptor';
 import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
 import { CommentsReplyComponent } from './comments-reply/comments-reply.component';
+import { PermissionsDirective } from './permissions.directive';
 
 @NgModule({
   entryComponents: [LoaderComponent, ReviewDialogComponent],
@@ -38,7 +39,8 @@ import { CommentsReplyComponent } from './comments-reply/comments-reply.componen
     LoginComponent,
     DashboardComponent,
     ReviewDialogComponent,
-    CommentsReplyComponent
+    CommentsReplyComponent,
+    PermissionsDirective
   ],
   imports: [
     BrowserModule,

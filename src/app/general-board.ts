@@ -9,7 +9,7 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
   loading = true;
   centers: string;
 
-  constructor(protected customerService: CustomerCareService) {}
+  constructor(protected customerService: CustomerCareService) { }
 
   /**
    * @description - listnes to the branches selector and set some variables 
@@ -39,6 +39,8 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
    */
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.request.unsubscribe();
+    if (this.request) {
+      this.request.unsubscribe();
+    }
   }
 }

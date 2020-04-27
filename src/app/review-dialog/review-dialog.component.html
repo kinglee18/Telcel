@@ -14,6 +14,8 @@
       #answer="ngModel"
       required
       id="answer"
+      [disabled]=data.review.reply
+
     ></textarea>
   </div>
 </mat-dialog-content>
@@ -29,6 +31,7 @@
     (click)="submitReply()"
     [disabled]="answer.invalid"
     id="submit"
+    *ngIf=!data.review.reply
   >
     Contestar
   </button>

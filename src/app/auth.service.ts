@@ -10,7 +10,7 @@ import { takeUntil } from "rxjs/operators";
 export class AuthService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login({ email, password }) {
     return new Observable(observer => {
@@ -20,6 +20,7 @@ export class AuthService implements OnDestroy {
         .subscribe(
           data => {
             this.saveToken(data["access_token"]);
+            this.savePermissions(data['permissions']);
             observer.next();
           },
           error => {
@@ -33,18 +34,18 @@ export class AuthService implements OnDestroy {
     return new Observable(observer => {
       localStorage.removeItem("token");
       observer.next();
-/*       this.http
-        .delete(environment.api + "auth")
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(
-          data => {
-            localStorage.removeItem("token");
-            observer.next();
-          },
-          error => {
-            observer.error(error);
-          }
-        ); */
+      /*       this.http
+              .delete(environment.api + "auth")
+              .pipe(takeUntil(this.unsubscribe$))
+              .subscribe(
+                data => {
+                  localStorage.removeItem("token");
+                  observer.next();
+                },
+                error => {
+                  observer.error(error);
+                }
+              ); */
     });
   }
 
@@ -61,8 +62,17 @@ export class AuthService implements OnDestroy {
     localStorage.setItem("token", token);
   }
 
+  savePermissions(permissions: Array<object>) {
+    localStorage.setItem('permissions',
+      permissions.map(p => Object.keys(p)).toString()
+    );
+  }
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  getUserPermissions(): Array<string> {
+    return (localStorage.getItem('permissions') || '').split(',');
   }
 }

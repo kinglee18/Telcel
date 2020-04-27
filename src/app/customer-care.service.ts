@@ -13,14 +13,22 @@ export class CustomerCareService {
   private dateRange;
   branchesChanged$ = this.branchesupdated.asObservable();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   /**
    * @description - request all branches from server according to the submitted date range
    */
-  getCenters(): Promise<object> {
+  getCenters(all=false): Promise<object> {
+    let url: string;
+    if (all) {
+      url = "comments/centers/list";
+
+    } else {
+      url = "centers";
+
+    }
     return this.httpClient
-      .get(environment.api + "centers", {
+      .get(environment.api + url, {
         params: {
           date_init: this.getDate().begin,
           date_end: this.getDate().end
@@ -48,7 +56,7 @@ export class CustomerCareService {
    * @param range - date range from the selection input
    * @description - transform the selected input into an object with moment format
    */
-  setDateRange(range: any): void {
+  saveDateRange(range: any): void {
     const newDate = {
       begin: moment(range.begin).format("DD/MM/YYYY"),
       end: moment(range.end).format("DD/MM/YYYY")

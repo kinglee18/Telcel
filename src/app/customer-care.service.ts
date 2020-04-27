@@ -18,12 +18,14 @@ export class CustomerCareService {
   /**
    * @description - request all branches from server according to the submitted date range
    */
-  getCenters(all: boolean): Promise<object> {
+  getCenters(all=false): Promise<object> {
     let url: string;
     if (all) {
-      url = "centers";
-    } else {
       url = "comments/centers/list";
+
+    } else {
+      url = "centers";
+
     }
     return this.httpClient
       .get(environment.api + url, {

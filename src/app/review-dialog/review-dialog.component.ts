@@ -24,7 +24,7 @@ export class ReviewDialogComponent {
       .replyReview(this.data.review.id, this.model.answer)
       .subscribe(
         data => {
-          this.data.review.answered = true;
+          this.data.review.reply = data.reply;
           alert("El comentario ha sido enviado");
           this.dialogRef.close(this.data.review);
         },

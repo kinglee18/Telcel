@@ -18,14 +18,14 @@ declare var KTLayout: any;
 })
 export class DashboardComponent implements OnDestroy {
   maxDate = new Date();
-  protected branches: Branch[] = [];
+  branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
   public dateRange: FormControl = new FormControl(moment());
   public branchMultiFilterCtrl: FormControl = new FormControl();
   public filteredBranches: ReplaySubject<Branch[]> = new ReplaySubject<
     Branch[]
   >(1);
-  private toggleAllCheckboxChecked = false;
+  toggleAllCheckboxChecked = false;
   protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
   private allCenters: boolean;

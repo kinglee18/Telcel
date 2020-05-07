@@ -24,9 +24,11 @@ import { RequestInterceptor } from './request-interceptor';
 import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
 import { CommentsReplyComponent } from './comments-reply/comments-reply.component';
 import { PermissionsDirective } from './permissions.directive';
+import { EmptyDirective } from './empty.directive';
+import { EmptyComponent } from './empty/empty.component';
 
 @NgModule({
-  entryComponents: [LoaderComponent, ReviewDialogComponent],
+  entryComponents: [LoaderComponent, ReviewDialogComponent, EmptyComponent],
   declarations: [
     AppComponent,
     ActivityComponent,
@@ -40,7 +42,9 @@ import { PermissionsDirective } from './permissions.directive';
     DashboardComponent,
     ReviewDialogComponent,
     CommentsReplyComponent,
-    PermissionsDirective
+    PermissionsDirective,
+    EmptyDirective,
+    EmptyComponent
   ],
   imports: [
     BrowserModule,

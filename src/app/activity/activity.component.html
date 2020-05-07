@@ -10,19 +10,23 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Comentarios</h5>
-            <google-chart
-            class="chart"
-              *apploading="loading"
-              [data]="monthlyReviews"
-              [type]="'ColumnChart'"
-              [options]="{
+            <div 
+              *empty="monthlyReviews"
+              >
+              <google-chart
+                class="chart"
+                *apploading="loading"
+                [data]="monthlyReviews"
+                [type]="'ColumnChart'"
+                [options]="{
                 bar: { groupWidth: '30%' },
                 legend: { position: 'none' }
-              }"
-              [title]="'¿Cuántas reseñas se reciben mensualmente?'"
-              [columnNames]="['Fecha', 'Comentarios']"
-       
-            ></google-chart>
+                }"
+                [title]="'¿Cuántas reseñas se reciben mensualmente?'"
+                [columnNames]="['Fecha', 'Comentarios']"
+              ></google-chart>
+            </div>
+
           </div>
         </div>
       </div>
@@ -34,6 +38,11 @@
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
+            <div
+              *empty="languages"
+            >
+
+            </div>
             <google-chart
             class="chart"
               *apploading="loading"
@@ -49,6 +58,10 @@
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
+            <div
+              *empty="otherLanguages"
+            >
+          >
             <google-chart
             class="chart"
               *apploading="loading"
@@ -59,6 +72,7 @@
                 '¿Qué otros idiomas se usan en la sección de comentarios del formulario?'
               "
             ></google-chart>
+          </div>
           </div>
         </div>
       </div>

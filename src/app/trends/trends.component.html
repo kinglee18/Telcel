@@ -9,22 +9,27 @@
       <div class="row row-full-height">
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
-            <google-chart
-              class="chart"
-              *apploading="loading"
-              [data]="averageSentiment"
-              [type]="'ScatterChart'"
-              [options]="options"
-              [title]="
-                'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'
-              "
-              [columnNames]="[
-                'Entidad',
-                'Calificación',
-                { type: 'string', role: 'style' },
-                { type: 'string', role: 'tooltip', p: { html: true } }
-              ]"
-            ></google-chart>
+            <div
+              *empty=averageSentiment
+              >
+                <google-chart
+                  class="chart"
+                  *apploading="loading"
+                  [data]="averageSentiment"
+                  [type]="'ScatterChart'"
+                  [options]="options"
+                  [title]="
+                    'En todos los comentarios, ¿cuáles son las entidades más mencionadas y el puntaje de sentimiento promedio?'
+                  "
+                  [columnNames]="[
+                    'Entidad',
+                    'Calificación',
+                    { type: 'string', role: 'style' },
+                    { type: 'string', role: 'tooltip', p: { html: true } }
+                  ]"
+              ></google-chart>
+            </div>
+
           </div>
         </div>
         <div
@@ -36,7 +41,10 @@
                 ¿Qué entidades mencionadas en los comentarios tienen el puntaje
                 de sentimiento promedio más alto?
               </h6>
-              <google-chart
+              <div
+                *empty="highestAverage"  
+              >
+                <google-chart
                 class="chart"
                 *apploading="loading"
                 [data]="highestAverage"
@@ -52,6 +60,7 @@
                 [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
                 [formatter]="formatter"
               ></google-chart>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -60,19 +69,24 @@
                 ¿Qué entidades mencionadas en los comentarios tienen el puntaje
                 de sentimiento promedio más bajo?
               </h6>
-              <google-chart
-                class="chart"
-                *apploading="loading"
-                [data]="lowerAverage"
-                [type]="'Table'"
-                [columnNames]="[
-                  'Entidad',
-                  'Calificación',
-                  'Número de menciones'
-                ]"
-                [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
-                [formatter]="formatter"
-              ></google-chart>
+              <div
+                *empty="lowerAverage"
+              >
+                <google-chart
+                  class="chart"
+                  *apploading="loading"
+                  [data]="lowerAverage"
+                  [type]="'Table'"
+                  [columnNames]="[
+                    'Entidad',
+                    'Calificación',
+                    'Número de menciones'
+                  ]"
+                  [options]="{ page: 'enable', pageSize: 10, allowHtml: true }"
+                  [formatter]="formatter"
+                ></google-chart>      
+              </div>
+
             </div>
           </div>
         </div>

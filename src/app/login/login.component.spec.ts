@@ -10,7 +10,7 @@ import { Location } from "@angular/common";
 import { LoginComponent } from "./login.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CustomMaterialModule } from "../material.module";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../services/auth.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { of, Observable } from "rxjs";

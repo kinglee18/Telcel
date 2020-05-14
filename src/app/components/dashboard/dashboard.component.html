@@ -1,0 +1,245 @@
+<div class="kt-grid kt-grid--hor kt-grid--root">
+  <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+    <button class="kt-aside-close " id="kt_aside_close_btn">
+      <i class="la la-close"></i>
+    </button>
+
+    <div
+      class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop"
+      id="kt_aside"
+      style="opacity: 1;"
+    >
+      <div
+        class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid"
+        id="kt_aside_menu_wrapper"
+      >
+        <div
+          id="kt_aside_menu"
+          class="kt-aside-menu kt-scroll ps ps--active-y"
+          data-ktmenu-vertical="1"
+          data-ktmenu-scroll="1"
+          data-ktmenu-dropdown-timeout="500"
+          style="height: 228px; overflow: hidden;"
+        >
+          <ul class="kt-menu__nav ">
+            <li
+              *hasPermission="['actividad_respuestas']"
+              routerLinkActive="active"
+              [routerLink]="['/activity']"
+              class="kt-menu__item  kt-menu__item--submenu"
+              aria-haspopup="true"
+              data-ktmenu-submenu-toggle="hover"
+            >
+              <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <i class="kt-menu__link-icon fa fa-comments "></i
+                ><span class="kt-menu__link-text"
+                  >Actividad de las respuestas</span
+                ></a
+              >
+            </li>
+            <li
+              *hasPermission="['tendencias_sentimientos']"
+              routerLinkActive="active"
+              [routerLink]="['/trends']"
+              class="kt-menu__item  kt-menu__item--submenu"
+              aria-haspopup="true"
+              data-ktmenu-submenu-toggle="hover"
+            >
+              <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <i class="kt-menu__link-icon fa fa-smile-o "></i
+                ><span class="kt-menu__link-text"
+                  >Tendencias de sentimiento</span
+                ></a
+              >
+            </li>
+
+            <li
+              *hasPermission="['detalles_sentimiento']"
+              routerLinkActive="active"
+              [routerLink]="['/entities-sentiment']"
+              class="kt-menu__item  kt-menu__item--submenu"
+              aria-haspopup="true"
+              data-ktmenu-submenu-toggle="hover"
+            >
+              <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <i class="kt-menu__link-icon fa fa-line-chart "></i
+                ><span class="kt-menu__link-text"
+                  >Detalles de sentimiento por entidad</span
+                ></a
+              >
+            </li>
+
+            <li
+              *hasPermission="['texto_completo']"
+              routerLinkActive="active"
+              [routerLink]="['/coments']"
+              class="kt-menu__item  kt-menu__item--submenu"
+              aria-haspopup="true"
+              data-ktmenu-submenu-toggle="hover"
+            >
+              <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <i class="kt-menu__link-icon fa fa-commenting "></i
+                ><span class="kt-menu__link-text"
+                  >Texto completo del comentario por entidad</span
+                ></a
+              >
+            </li>
+            <li
+            *hasPermission="['texto_completo']"
+            routerLinkActive="active"
+            [routerLink]="['/coments-reply']"
+            class="kt-menu__item  kt-menu__item--submenu"
+            aria-haspopup="true"
+            data-ktmenu-submenu-toggle="hover"
+          >
+            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+              <i class="kt-menu__link-icon fa fa-commenting "></i
+              ><span class="kt-menu__link-text"
+                >Responder comentarios</span
+              ></a
+            >
+          </li>
+          <li
+         
+          routerLinkActive="active"
+          [routerLink]="['/user/list']"
+          class="kt-menu__item  kt-menu__item--submenu"
+          aria-haspopup="true"
+          data-ktmenu-submenu-toggle="hover"
+        >
+          <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+            <i class="kt-menu__link-icon fa fa-user "></i
+            ><span class="kt-menu__link-text"
+              >Usuarios</span
+            ></a
+          >
+        </li>
+          </ul>
+          <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+            <div
+              class="ps__thumb-x"
+              tabindex="0"
+              style="left: 0px; width: 0px;"
+            ></div>
+          </div>
+          <div class="ps__rail-y" style="top: 0px; height: 228px; right: 2px;">
+            <div
+              class="ps__thumb-y"
+              tabindex="0"
+              style="top: 0px; height: 93px;"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
+      id="kt_wrapper"
+    >
+      <div
+        id="kt_header"
+        class="kt-header kt-grid kt-grid--ver  kt-header--fixed "
+      >
+        <div
+          class="kt-header__brand kt-grid__item  "
+          id="kt_header_brand"
+          kt-hidden-height="80"
+        >
+          <div class="kt-header__brand-logo" id="logo">
+            <img src="../assets/telcel.svg" alt="" />
+          </div>
+        </div>
+        <h3 class="kt-header__title kt-grid__item w-10">
+          Comentarios CAC Telcel 
+        </h3>
+
+        <div
+          class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid"
+          id="kt_header_menu_wrapper"
+          style="opacity: 1;"
+        >
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-3 col-sm-3 ">
+              <mat-form-field class="mt-3">
+                <mat-select
+                  [formControl]="branchMultiCtrl"
+                  placeholder="Centros de atención"
+                  [multiple]="true"
+                  id="cac-select"
+                  #multiSelect
+                  multiple
+                  [attr.disabled]="!branches.length"
+                >
+                  <mat-select-trigger>
+                    {{
+                      branchMultiCtrl.value &&
+                      branchMultiCtrl.value.length == 1 &&
+                      branchMultiCtrl.value[0]
+                        ? branchMultiCtrl.value[0].name
+                        : ""
+                    }}
+                    <span *ngIf="branchMultiCtrl.value?.length > 1">
+                      {{ branchMultiCtrl.value?.length }} seleccionados
+                    </span>
+                  </mat-select-trigger>
+                  <ngx-mat-select-search
+                    id="cac-search-box"
+                    [showToggleAllCheckbox]="true"
+                    [toggleAllCheckboxChecked]="toggleAllCheckboxChecked"
+                    (toggleAll)="toggleBranches($event)"
+                    [formControl]="branchMultiFilterCtrl"
+                    [placeholderLabel]="'Buscar'"
+                    [noEntriesFoundLabel]="'No se encontraron resultados'"
+                  ></ngx-mat-select-search>
+                  <mat-option
+                    *ngFor="let branch of filteredBranches | async"
+                    [value]="branch"
+                  >
+                    <div class="row">
+                      <div class="col-md-9">{{ branch.name }}</div>
+                      <span
+                        class="col-md-3 col-sm-3 "
+                        (click)="branchSingleSelection($event, branch)"
+                        >Elegir</span
+                      >
+                    </div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="mt-3">
+                <input
+                  matInput
+                  [max]="maxDate"
+                  placeholder="Rango de fechas"
+                  [formControl]="dateRange"
+                  [satDatepicker]="picker2"
+                />
+                <sat-datepicker #picker2 [rangeMode]="true"> </sat-datepicker>
+                <sat-datepicker-toggle
+                  matSuffix
+                  [for]="picker2"
+                ></sat-datepicker-toggle>
+              </mat-form-field>
+            </div>
+            <div class="col-md-1">
+              <i
+                (click)="closeSession()"
+                class="fa fa-sign-out mt-4"
+                [matTooltipPosition]="'left'"
+                matTooltip="Cerrar sesión"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+        id="kt_content"
+      >
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

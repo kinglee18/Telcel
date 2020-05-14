@@ -7,25 +7,27 @@ import { AppComponent } from './app.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from './material.module';
-import { ActivityComponent } from './activity/activity.component';
-import { TrendsComponent } from './trends/trends.component';
-import { EntitiesSentimentComponent } from './entities-sentiment/entities-sentiment.component';
-import { ComentsComponent } from './coments/coments.component';
+import { ActivityComponent } from './components/activity/activity.component';
+import { TrendsComponent } from './components/trends/trends.component';
+import { EntitiesSentimentComponent } from './components/entities-sentiment/entities-sentiment.component';
+import { ComentsComponent } from './components/coments/coments.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { EntityBoxComponent } from './entity-box/entity-box.component';
+import { EntityBoxComponent } from './components/entity-box/entity-box.component';
 import { LoadingDirective } from './loading.directive';
 import { LoaderComponent } from './loader/loader.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RequestInterceptor } from './request-interceptor';
-import { ReviewDialogComponent } from './review-dialog/review-dialog.component';
-import { CommentsReplyComponent } from './comments-reply/comments-reply.component';
+import { ReviewDialogComponent } from './components/review-dialog/review-dialog.component';
+import { CommentsReplyComponent } from './components/comments-reply/comments-reply.component';
 import { PermissionsDirective } from './permissions.directive';
 import { EmptyDirective } from './empty.directive';
 import { EmptyComponent } from './empty/empty.component';
+import { UserListComponent } from './administration/user-list/user-list.component';
+import { UserDetailComponent } from './administration/user-detail/user-detail.component';
 
 @NgModule({
   entryComponents: [LoaderComponent, ReviewDialogComponent, EmptyComponent],
@@ -44,7 +46,9 @@ import { EmptyComponent } from './empty/empty.component';
     CommentsReplyComponent,
     PermissionsDirective,
     EmptyDirective,
-    EmptyComponent
+    EmptyComponent,
+    UserListComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

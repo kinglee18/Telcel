@@ -154,6 +154,7 @@ export class DashboardComponent implements OnDestroy {
   verifyRoute() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(takeUntil(this._onDestroy))
       .subscribe((val: NavigationEnd) => {
         const state = val.url === '/coments-reply';
         if (state !== this.allCenters) {

@@ -1,24 +1,27 @@
 import { Injectable } from "@angular/core";
-import { ReplaySubject } from "rxjs";
+import { ReplaySubject, Observable, BehaviorSubject, Subscription } from "rxjs";
 import { Branch } from "../branch";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import * as moment from "moment";
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
 })
 export class CustomerCareService {
-  private branchesupdated = new ReplaySubject<string>(1);
-  private dateRange;
-  branchesChanged$ = this.branchesupdated.asObservable();
+  private selectedBranches = new ReplaySubject<string>(1);
 
+  private dateRange;
+  branchesChanged$ = this.selectedBranches.asObservable();
+
+  branches$ = new BehaviorSubject([]);
   constructor(private httpClient: HttpClient) { }
 
   /**
    * @description - request all branches from server according to the submitted date range
    */
-  getCenters(all=false): Promise<object> {
+  getCenters(all = false): Subscription {
     let url: string;
     if (all) {
       url = "comments/centers/list";
@@ -34,7 +37,8 @@ export class CustomerCareService {
           date_end: this.getDate().end
         }
       })
-      .toPromise();
+      .pipe(take(1))
+      .subscribe((centers: Array<any>) => this.branches$.next(centers));
   }
 
   /**
@@ -44,7 +48,7 @@ export class CustomerCareService {
    * available from any component
    */
   selectBranches(branches: Array<Branch>): void {
-    this.branchesupdated.next(
+    this.selectedBranches.next(
       branches.map(ele => {
         return ele.id;
       }).join(',')

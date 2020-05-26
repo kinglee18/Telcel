@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { MatDialog, MatSnackBar, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { ReviewDialogComponent } from '../review-dialog/review-dialog.component';
 import { GeneralBoard } from '../general-board';
@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './comments-reply.component.html',
   styleUrls: ['./comments-reply.component.scss']
 })
-export class CommentsReplyComponent extends GeneralBoard {
+export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataSource = new MatTableDataSource();
@@ -26,6 +26,19 @@ export class CommentsReplyComponent extends GeneralBoard {
     super(customerService);
   }
 
+
+  ngOnInit(){
+
+  }
+  ngAfterViewInit() {
+    this.customerService.getCenters(true);
+    super.ngAfterViewInit();
+  }
+
+  ngOnDestroy() {
+    this.customerService.getCenters()
+    
+  }
   /**
    * @param centers - selected branches in dashboard
    * @param date - selected date range in dashboard

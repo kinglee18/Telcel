@@ -28,7 +28,7 @@ export class DashboardComponent implements OnDestroy {
   toggleAllCheckboxChecked = false;
   protected _onDestroy = new Subject<void>();
   @ViewChild("multiSelect", { static: true }) multiSelect: MatSelect;
-  private allCenters: boolean;
+
 
   /**
    * @description - set all subscriptions to listen for events in DOM and
@@ -40,10 +40,15 @@ export class DashboardComponent implements OnDestroy {
     private router: Router
   ) {
 
-    this.verifyRoute();
+    this.customerService.branches$.subscribe(data => {
+      this.branches = data;
+      this.filteredBranches.next(data.slice());
+      this.toggleBranches(true);
+    });
+
     this.dateRange.valueChanges.subscribe(date => {
       this.customerService.saveDateRange(date);
-      this.requestBranches();
+      this.customerService.getCenters();
     });
     this.setDefaultDate();
 
@@ -148,30 +153,5 @@ export class DashboardComponent implements OnDestroy {
     setTimeout(() => {
       KTLayout.init();
     }, 300);
-  }
-
-  verifyRoute() {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe((val: NavigationEnd) => {
-        const state = val.url === '/coments-reply';
-        if (state !== this.allCenters) {
-          this.allCenters = state;
-
-          this.requestBranches();
-        }
-        this.allCenters = state;
-      });
-  }
-
-  requestBranches() {
-    this.customerService
-      .getCenters(this.allCenters)
-      .then((centers: Array<any>) => {
-        this.branches = centers;
-        this.filteredBranches.next(centers.slice());
-        this.toggleBranches(true);
-      });
   }
 }

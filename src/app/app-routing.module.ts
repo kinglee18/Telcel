@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ActivityComponent } from "./activity/activity.component";
-import { TrendsComponent } from "./trends/trends.component";
-import { EntitiesSentimentComponent } from "./entities-sentiment/entities-sentiment.component";
-import { ComentsComponent } from "./coments/coments.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { ActivityComponent } from "./components/activity/activity.component";
+import { TrendsComponent } from "./components/trends/trends.component";
+import { EntitiesSentimentComponent } from "./components/entities-sentiment/entities-sentiment.component";
+import { ComentsComponent } from "./components/coments/coments.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
 import { LoginGuard } from './login.guard';
-import { CommentsReplyComponent } from './comments-reply/comments-reply.component';
+import { CommentsReplyComponent } from './components/comments-reply/comments-reply.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "activity", pathMatch: "full" },
+  { path: 'administration', loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule) },
   { path: "login", component: LoginComponent },
   {
     path: "",
@@ -23,11 +23,11 @@ const routes: Routes = [
       { path: "coments", component: ComentsComponent },
       { path: "coments-reply", component: CommentsReplyComponent }
     ]
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

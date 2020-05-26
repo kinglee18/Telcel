@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { AuthService } from "../auth.service";
+import { AuthService } from "../services/auth.service";
 import { Subscription } from "rxjs";
 import { Router } from "@angular/router";
 
@@ -25,7 +25,7 @@ export class LoginComponent implements  OnDestroy {
       .subscribe(
         data => {
           this.loginError = false;
-          this.router.navigate(["/activity"]);
+          this.router.navigate([""]);
         },
         error => {
           if (error.status === 401) {

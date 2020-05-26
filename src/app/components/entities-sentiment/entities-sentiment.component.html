@@ -1,0 +1,48 @@
+<div class="col-md-12 pt-3">
+  <h2>Detalles de Sentimiento por Entidad</h2>
+  <div *empty="entities">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="row row-full-height">
+          <div class="col-md-4">
+            <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+              <app-entity-box [loading]="loading" *ngIf="entities.length" (selected)="selectedEntity($event)" [data]=entities>
+              </app-entity-box>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+                  <google-chart class="chart" *apploading="chartsLoading" [data]="scoreByMention" [type]="'ColumnChart'"
+                    [options]="{
+                    legend: { position: 'none' },
+                    hAxis: { title: 'Puntuación' },
+                    vAxis: { title: 'Número de menciones' }
+                  }" [title]="
+                    'Histograma de puntajes de sentimiento para cada mención'
+                  " [columnNames]="['Menciones', 'Puntuación']"></google-chart>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
+                  <google-chart class="chart" *apploading="chartsLoading" [data]="averages" [type]="'LineChart'"
+                    [options]="{
+                    legend: { position: 'none' },
+                    hAxis: { title: 'Fecha', textPosition: 'out' },
+                    vAxis: { title: 'Puntuación' }
+                  }" [title]="
+                    'Puntajes de sentimiento promedio a lo largo del tiempo'
+                  "></google-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

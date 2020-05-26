@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -28,10 +28,13 @@ export class RequestInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap(() => { },
       (err: any) => {
         if (err instanceof HttpErrorResponse) {
-          if (err.status !== 401) {
+          if (err.status === 401) {
+            this.router.navigate(['/login']);
+          } else if (err.status === 500) {
+         /*    alert('algo mal ha ocurrido') */
+          } else {
             return;
           }
-          this.router.navigate(['/login']);
         }
       }));
   }

@@ -25,7 +25,7 @@ export class LoginComponent implements  OnDestroy {
       .subscribe(
         data => {
           this.loginError = false;
-          this.router.navigate(["/activity"]);
+          this.router.navigate([""]);
         },
         error => {
           if (error.status === 401) {

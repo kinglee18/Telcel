@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+declare var KTLayout: any;
 
 @Component({
   selector: 'app-administration',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  /**
+   * @description - close user current session in applpication
+   */
+  closeSession() {
+    this.authService.logout().subscribe(
+      data => {
+        this.router.navigate(["/login"]);
+      }
+    );
+  }
+
+  /**
+   * @description - triggers jquery onDocumentReady function to enable dom effects
+   */
+  ngAfterViewInit() {
+    setTimeout(() => {
+      KTLayout.init();
+    }, 300);
+  }
 }

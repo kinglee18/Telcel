@@ -8,11 +8,9 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
 import { LoginGuard } from './login.guard';
 import { CommentsReplyComponent } from './components/comments-reply/comments-reply.component';
-import { UserListComponent } from './administration/user-list/user-list.component';
-import { UserDetailComponent } from './administration/user-detail/user-detail.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "activity", pathMatch: "full" },
+  { path: 'administration', loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule) },
   { path: "login", component: LoginComponent },
   {
     path: "",
@@ -23,17 +21,9 @@ const routes: Routes = [
       { path: "trends", component: TrendsComponent },
       { path: "entities-sentiment", component: EntitiesSentimentComponent },
       { path: "coments", component: ComentsComponent },
-      { path: "coments-reply", component: CommentsReplyComponent },
-   /*    {
-        path: 'user',
-        children: [
-          { path: "detail", component: UserDetailComponent },
-          { path: "list", component: UserListComponent },
-        ]
-      } */
+      { path: "coments-reply", component: CommentsReplyComponent }
     ]
   },
-  { path: 'administration', loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule) }
 ];
 
 @NgModule({

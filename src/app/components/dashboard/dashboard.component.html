@@ -85,7 +85,7 @@
               >
             </li>
             <li
-            *hasPermission="['texto_completo']"
+            *hasPermission="['listar_comentarios']"
             routerLinkActive="active"
             [routerLink]="['/coments-reply']"
             class="kt-menu__item  kt-menu__item--submenu"
@@ -100,9 +100,9 @@
             >
           </li>
           <li
-         
+          *hasPermission="['listar_usuarios']"
           routerLinkActive="active"
-          [routerLink]="['/user/list']"
+          [routerLink]="['/administration/users']"
           class="kt-menu__item  kt-menu__item--submenu"
           aria-haspopup="true"
           data-ktmenu-submenu-toggle="hover"
@@ -110,7 +110,7 @@
           <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
             <i class="kt-menu__link-icon fa fa-user "></i
             ><span class="kt-menu__link-text"
-              >Usuarios</span
+              >Administración</span
             ></a
           >
         </li>

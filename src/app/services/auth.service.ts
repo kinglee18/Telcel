@@ -21,6 +21,7 @@ export class AuthService implements OnDestroy {
           data => {
             this.saveToken(data["access_token"]);
             this.savePermissions(data['permissions']);
+            this.saveUser(data['idUser']);
             observer.next();
           },
           error => {
@@ -67,6 +68,15 @@ export class AuthService implements OnDestroy {
       permissions.map(p => Object.keys(p)).toString()
     );
   }
+
+  saveUser(id: number) {
+    localStorage.setItem('id', id.toString());
+  }
+
+  getUserId() {
+    return localStorage.getItem('id');
+  }
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();

@@ -1,1 +1,61 @@
-<p>user-list works!</p>
+<div class="col-md-12 pt-3">
+    <div class=" kt-container kt-grid__item kt-grid__item--fluid kt-container--fluid">
+        <h2>Usuarios</h2>
+    </div>
+    <div class="row kt-portlet p-3 kt-portlet--border-bottom-brand">
+        <div class="col-xl-12">
+            <div class="row d-flex justify-content-end">
+                <button mat-button mat-raised-button color="primary"
+                    [routerLink]="['/administration/user/create']">Crear usuario</button>
+            </div>
+            <div class="row row-full-height">
+
+                <div class="col-sm-12 col-md-12 col-lg-12 ">
+                    <div id="table-container">
+                        <table mat-table matSort [dataSource]="dataSource" class="w-100">
+                     <!--        <ng-container matColumnDef="username">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre de usuario</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <a [routerLink]="['/administration/user/update/', element.id]">
+                                        {{ element.username }}</a>
+                                </td>
+                            </ng-container> -->
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <a [routerLink]="['/administration/user/update/', element.idUser]">  {{ element.name }} </a>
+                                   
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="apaterno">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido paterno</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.amaterno }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="amaterno">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido materno</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.apaterno }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="idRol">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.idRol }}
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row
+                                *matHeaderRowDef="['name', 'apaterno', 'amaterno']; sticky: true">
+                            </tr>
+                            <tr mat-row *matRowDef="let row; columns: ['name', 'apaterno', 'amaterno']">
+                            </tr>
+                        </table>
+                    </div>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

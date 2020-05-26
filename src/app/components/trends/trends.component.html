@@ -10,11 +10,13 @@
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <div
-              *empty=averageSentiment
+            *apploading="loading"
+
               >
                 <google-chart
+                *empty=averageSentiment
+
                   class="chart"
-                  *apploading="loading"
                   [data]="averageSentiment"
                   [type]="'ScatterChart'"
                   [options]="options"
@@ -42,11 +44,12 @@
                 de sentimiento promedio más alto?
               </h6>
               <div
-                *empty="highestAverage"  
+                *apploading="loading"
               >
                 <google-chart
+                *empty="highestAverage"  
+
                 class="chart"
-                *apploading="loading"
                 [data]="highestAverage"
                 [type]="'Table'"
                 [title]="
@@ -70,11 +73,13 @@
                 de sentimiento promedio más bajo?
               </h6>
               <div
-                *empty="lowerAverage"
+              *apploading="loading"
+
               >
                 <google-chart
+                *empty="lowerAverage"
+
                   class="chart"
-                  *apploading="loading"
                   [data]="lowerAverage"
                   [type]="'Table'"
                   [columnNames]="[

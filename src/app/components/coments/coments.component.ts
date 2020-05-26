@@ -9,6 +9,7 @@ import {
   MatSnackBar
 } from "@angular/material";
 import * as moment from "moment";
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: "app-coments",
@@ -36,8 +37,9 @@ export class ComentsComponent extends GeneralBoard {
    */
   showBoardInfo(centers, date) {
     this.commentsLoader = true;
-    this.request = this.commentsService
+    this.commentsService
       .getEntitiesByComments(centers, date)
+      .pipe(take(1))
       .subscribe(data => {
         this.loading = false;
         this.entities = data["entities"];
@@ -58,6 +60,7 @@ export class ComentsComponent extends GeneralBoard {
     this.commentsLoader = true;
     this.commentsService
       .getComments(this.centers, date, entity)
+      .pipe(take(1))
       .subscribe(data => {
         data.map(element => {
           moment.locale('es');

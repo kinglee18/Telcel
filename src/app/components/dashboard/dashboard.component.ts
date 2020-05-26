@@ -137,9 +137,6 @@ export class DashboardComponent implements OnDestroy {
     this.authService.logout().subscribe(
       data => {
         this.router.navigate(["/login"]);
-      },
-      error => {
-        alert("No es posible cerrar sesión en este momento");
       }
     );
   }
@@ -148,7 +145,9 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-    KTLayout.init();
+    setTimeout(() => {
+      KTLayout.init();
+    }, 300);
   }
 
   verifyRoute() {
@@ -173,9 +172,6 @@ export class DashboardComponent implements OnDestroy {
         this.branches = centers;
         this.filteredBranches.next(centers.slice());
         this.toggleBranches(true);
-      })
-      .catch(err => {
-        alert("No es posible consultar la información en este momento");
       });
   }
 }

@@ -16,18 +16,18 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EntityBoxComponent } from './components/entity-box/entity-box.component';
-import { LoadingDirective } from './loading.directive';
-import { LoaderComponent } from './loader/loader.component';
+import { LoaderComponent } from './directives/loader/loader.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RequestInterceptor } from './request-interceptor';
 import { ReviewDialogComponent } from './components/review-dialog/review-dialog.component';
 import { CommentsReplyComponent } from './components/comments-reply/comments-reply.component';
-import { PermissionsDirective } from './permissions.directive';
-import { EmptyDirective } from './empty.directive';
-import { EmptyComponent } from './empty/empty.component';
+import { PermissionsDirective } from './directives/permissions.directive';
+import { EmptyDirective } from './directives/empty.directive';
+import { EmptyComponent } from './directives/empty/empty.component';
 import { UserListComponent } from './administration/user-list/user-list.component';
-import { UserDetailComponent } from './administration/user-detail/user-detail.component';
+import { UserUpdateComponent } from './administration/user-update/user-update.component';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   entryComponents: [LoaderComponent, ReviewDialogComponent, EmptyComponent],
@@ -38,17 +38,14 @@ import { UserDetailComponent } from './administration/user-detail/user-detail.co
     EntitiesSentimentComponent,
     ComentsComponent,
     EntityBoxComponent,
-    LoadingDirective,
     LoaderComponent,
     LoginComponent,
     DashboardComponent,
     ReviewDialogComponent,
     CommentsReplyComponent,
-    PermissionsDirective,
-    EmptyDirective,
     EmptyComponent,
     UserListComponent,
-    UserDetailComponent
+    UserUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +58,8 @@ import { UserDetailComponent } from './administration/user-detail/user-detail.co
     NgxMatSelectSearchModule,
     SatDatepickerModule,
     SatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    DirectivesModule
   ],
   providers: [
     {

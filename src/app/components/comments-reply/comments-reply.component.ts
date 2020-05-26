@@ -5,6 +5,7 @@ import { GeneralBoard } from '../general-board';
 import { CustomerCareService } from '../../services/customer-care.service';
 import { CommentsService } from '../../services/comments.service';
 import * as moment from "moment";
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-comments-reply',
@@ -31,8 +32,9 @@ export class CommentsReplyComponent extends GeneralBoard {
    * @description - makes a request to retrieve all keywords
    */
   showBoardInfo(centers, date) {
-    this.request = this.commentsService
+    this.commentsService
       .getAllComments(this.centers, date)
+      .pipe(take(1))
       .subscribe(data => {
         data.map(element => {
           moment.locale('es');

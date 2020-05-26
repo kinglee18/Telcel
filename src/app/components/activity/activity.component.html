@@ -11,11 +11,12 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Comentarios</h5>
             <div 
-              *empty="monthlyReviews"
+                *apploading="loading"
+
               >
               <google-chart
                 class="chart"
-                *apploading="loading"
+                *empty="monthlyReviews"
                 [data]="monthlyReviews"
                 [type]="'ColumnChart'"
                 [options]="{
@@ -39,32 +40,32 @@
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
             <div
-              *empty="languages"
-            >
-
-            </div>
-            <google-chart
-            class="chart"
               *apploading="loading"
-              [data]="languages"
-              [type]="'PieChart'"
-              [columnNames]="['Browser', 'Percentage']"
-              [title]="
-                '¿Qué idioma se usa en la sección de comentarios del formulario?'
-              "
-            ></google-chart>
+
+            >
+              <google-chart
+                class="chart"
+                *empty="otherLanguages"
+                [data]="languages"
+                [type]="'PieChart'"
+                [columnNames]="['Browser', 'Percentage']"
+                [title]="
+                  '¿Qué idioma se usa en la sección de comentarios del formulario?'
+                "
+              ></google-chart>
+          </div>
+
           </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6">
           <div class="kt-portlet p-3  kt-portlet--border-bottom-brand">
             <h5>Idiomas</h5>
             <div
-              *empty="otherLanguages"
-            >
-          >
-            <google-chart
-            class="chart"
               *apploading="loading"
+            >
+            <google-chart
+              *empty="otherLanguages"
+              class="chart"
               [data]="otherLanguages"
               [type]="'BarChart'"
               [options]="{ legend: { position: 'none' } }"

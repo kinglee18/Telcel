@@ -23,7 +23,7 @@ describe("ReviewDialogComponent", () => {
       providers: [
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {review:{id:2}} },
-        { provide: CommentsService, useValue: CommentsServiceStub }
+        { provide: CommentsService, useValue: new CommentsServiceStub() }
       ]
     }).compileComponents();
   }));

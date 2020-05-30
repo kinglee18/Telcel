@@ -36,7 +36,7 @@ export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDe
   }
 
   ngOnDestroy() {
-    this.customerService.getCenters()
+    this.customerService.getCenters();
     
   }
   /**

@@ -150,8 +150,8 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-    setTimeout(() => {
+/*     setTimeout(() => {
       KTLayout.init();
-    }, 300);
+    }, 300); */
   }
 }

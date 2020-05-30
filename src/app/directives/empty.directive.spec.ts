@@ -1,4 +1,4 @@
-import { EmptyDirective } from './empty.directive';
+/* import { EmptyDirective } from './empty.directive';
 
 describe('EmptyDirective', () => {
   it('should create an instance', () => {
@@ -6,3 +6,4 @@ describe('EmptyDirective', () => {
     expect(directive).toBeTruthy();
   });
 });
+ */

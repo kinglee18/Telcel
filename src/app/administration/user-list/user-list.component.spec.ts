@@ -1,16 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserListComponent } from './user-list.component';
+import { UserService } from 'src/app/services/user.service';
+import { UserServiceStub } from '../user-register/user-register.component.spec';
+import { AuthService } from 'src/app/services/auth.service';
 
+export class AuthServiceStub {
+  getUserId(){}
+}
 describe('UserListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserListComponent ]
+      declarations: [UserListComponent],
+      providers: [
+        { provide: UserService, useValue: new UserServiceStub() },
+        { provide: AuthService, useValue: new AuthServiceStub() }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

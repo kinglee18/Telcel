@@ -28,6 +28,8 @@ import { EmptyComponent } from './directives/empty/empty.component';
 import { UserListComponent } from './administration/user-list/user-list.component';
 import { UserUpdateComponent } from './administration/user-update/user-update.component';
 import { DirectivesModule } from './directives/directives.module';
+import { NoSelectionDirective } from './no-selection.directive';
+import { NoSelectionComponent } from './no-selection/no-selection.component';
 
 @NgModule({
   entryComponents: [LoaderComponent, ReviewDialogComponent, EmptyComponent],
@@ -45,7 +47,9 @@ import { DirectivesModule } from './directives/directives.module';
     CommentsReplyComponent,
     EmptyComponent,
     UserListComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    NoSelectionDirective,
+    NoSelectionComponent
   ],
   imports: [
     BrowserModule,

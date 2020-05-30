@@ -22,6 +22,8 @@ export class ActivityComponent extends GeneralBoard implements Board {
   }
 
   showBoardInfo(centers, date) {
+    console.log(this.centers);
+    
     this.request = this.commentsService.getMonthlyLanguageComments(centers, date).subscribe(data => {
       this.monthlyReviews = data["monthly_comments"];
       this.otherLanguages = data["other_languages"];

@@ -19,8 +19,10 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
         this.centers = centers;
-        this.loading = true;
-        this.showBoardInfo(centers, this.customerService.getDate());
+        if (centers.length) {
+          this.loading = true;
+          this.showBoardInfo(centers, this.customerService.getDate());
+        }
       }
     );
   }

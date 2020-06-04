@@ -3,7 +3,7 @@ import { CustomerCareService } from "../services/customer-care.service";
 import { Board } from "../board";
 import { AfterViewInit, OnDestroy, OnInit } from "@angular/core";
 
-export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
+export class GeneralBoard implements Board, OnInit, OnDestroy {
   subscription: Subscription;
   request: Subscription;
   loading = true;
@@ -15,7 +15,7 @@ export class GeneralBoard implements Board, AfterViewInit, OnDestroy {
    * @description - listnes to the branches selector and set some variables 
    * to inherit to its child clases
    */
-  ngAfterViewInit() {
+  ngOnInit() {
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
         this.centers = centers;

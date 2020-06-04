@@ -32,7 +32,7 @@ export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDe
   }
   ngAfterViewInit() {
     this.customerService.getCenters(true);
-    super.ngAfterViewInit();
+    super.ngOnInit();
   }
 
   ngOnDestroy() {

@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './comments-reply.component.html',
   styleUrls: ['./comments-reply.component.scss']
 })
-export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDestroy, AfterViewInit {
+export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataSource = new MatTableDataSource();
@@ -27,17 +27,15 @@ export class CommentsReplyComponent extends GeneralBoard implements OnInit, OnDe
   }
 
 
-  ngOnInit(){
-
-  }
-  ngAfterViewInit() {
+  ngOnInit() {
     this.customerService.getCenters(true);
-    super.ngOnInit();
+    setTimeout(() => {
+      super.ngOnInit();
+    }, 400);
   }
 
   ngOnDestroy() {
     this.customerService.getCenters();
-    
   }
   /**
    * @param centers - selected branches in dashboard

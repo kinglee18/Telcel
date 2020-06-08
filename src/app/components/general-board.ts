@@ -16,8 +16,6 @@ export class GeneralBoard implements Board, OnInit, OnDestroy {
    * to inherit to its child clases
    */
   ngOnInit() {
-    console.log(8);
-    
     this.subscription = this.customerService.branchesChanged$.subscribe(
       centers => {
         this.centers = centers;

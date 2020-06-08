@@ -38,6 +38,7 @@ export class TrendsComponent extends GeneralBoard implements Board, OnInit {
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.loaderService.onReady.subscribe(() => {
       this.loaderService
         .loadChartPackages([

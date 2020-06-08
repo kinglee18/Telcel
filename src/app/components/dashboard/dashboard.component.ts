@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy, OnInit } from "@angular/core";
+import { Component, ViewChild, OnDestroy, OnInit, AfterViewInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ReplaySubject, Subject } from "rxjs";
 import { MatSelect } from "@angular/material";
@@ -17,7 +17,7 @@ declare var KTLayout: any;
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.scss"]
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnDestroy, AfterViewInit {
   maxDate = new Date();
   branches: Branch[] = [];
   public branchMultiCtrl: FormControl = new FormControl();
@@ -152,9 +152,9 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-    /*     setTimeout(() => {
-          KTLayout.init();
-        }, 300); */
+    setTimeout(() => {
+      KTLayout.init();
+    }, 300);
   }
 
   redirect() {
@@ -164,6 +164,7 @@ export class DashboardComponent implements OnDestroy {
       const routes = [
         { route: '/activity', permission: 'actividad_respuestas' },
         { route: '/administration/users', permission: 'listar_usuarios' },
+        { route: '/comments-reply', permission: "listar_comentarios" }
       ];
       for (const item of routes) {
         if (this.authService.getUserPermissions().indexOf(item.permission) > -1) {

@@ -21,7 +21,9 @@ export class AuthService implements OnDestroy {
           data => {
             this.saveToken(data["access_token"]);
             this.savePermissions(data['permissions']);
-            this.saveUser(data['location']);
+            if (data['location']) {
+              this.saveUser(data['location']);
+            }
             observer.next();
           },
           error => {

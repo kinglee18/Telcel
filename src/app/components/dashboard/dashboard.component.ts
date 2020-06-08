@@ -8,7 +8,8 @@ import * as moment from "moment";
 import { CustomerCareService } from "../../services/customer-care.service";
 import { Branch } from "../../branch";
 import { AuthService } from "../../services/auth.service";
-import { Router, NavigationEnd } from "@angular/router";
+import { Router } from "@angular/router";
+
 declare var KTLayout: any;
 
 @Component({
@@ -64,6 +65,7 @@ export class DashboardComponent implements OnDestroy {
         this.toggleAllCheckboxChecked =
           this.branchMultiCtrl.value.length === this.branches.length;
       });
+    this.redirect();
   }
 
   /**
@@ -150,8 +152,25 @@ export class DashboardComponent implements OnDestroy {
    * @description - triggers jquery onDocumentReady function to enable dom effects
    */
   ngAfterViewInit() {
-/*     setTimeout(() => {
-      KTLayout.init();
-    }, 300); */
+    /*     setTimeout(() => {
+          KTLayout.init();
+        }, 300); */
+  }
+
+  redirect() {
+    if (this.router.url === '/') {
+      this.authService.getUserPermissions();
+
+      const routes = [
+        { route: '/activity', permission: 'actividad_respuestas' },
+        { route: '/administration/users', permission: 'listar_usuarios' },
+      ];
+      for (const item of routes) {
+        if (this.authService.getUserPermissions().indexOf(item.permission) > -1) {
+          this.router.navigate([item.route]);
+          break;
+        }
+      }
+    }
   }
 }

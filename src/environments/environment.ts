@@ -4,11 +4,14 @@
 
 export const environment = {
   production: false,
-  api: 'https://private-eeee39-cac.apiary-mock.com/'
+  api: 'http://35.239.238.154/'
+
+   /*  api: 'https://private-eeee39-cac.apiary-mock.com/'  */
+
 };
 
 /*
-api: 'http://104.154.136.107/'
+
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

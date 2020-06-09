@@ -14,7 +14,11 @@ import {
   MatTabsModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
-  MatRadioModule
+  MatRadioModule,
+  MatPaginatorModule,
+  MatDialogModule,
+  MatTooltipModule,
+  MatSnackBarModule,MatSortModule
 } from "@angular/material";
 import { NgModule } from "@angular/core";
 import {
@@ -42,10 +46,15 @@ const list = [
   MatChipsModule,
   MatTableModule,
   MatTabsModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatRadioModule,
-  SatDatepickerModule
+  SatDatepickerModule,
+  MatDialogModule,
+  MatTooltipModule,
+  MatSortModule,
+  MatSnackBarModule
 ];
 
 export const MY_FORMATS = {

@@ -1,0 +1,51 @@
+<div class="col-md-12 pt-3">
+    <div class=" kt-container kt-grid__item kt-grid__item--fluid kt-container--fluid">
+        <h2>Nuevo usuario</h2>
+    </div>
+    <div class="row kt-portlet p-3 kt-portlet--border-bottom-brand">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="col-md-12">
+                <div class="row">
+                    <mat-form-field class="col-md-4" autocomplete="off">
+                        <mat-label>Nombre</mat-label>
+                        <input autocomplete="off" formControlName="name" id="telcel_name" matInput />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input formControlName="lastNameM" id="telcel_lastname" matInput />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input formControlName="lastNameF" id="telcel_secondLastName" matInput />
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Correo electronico</mat-label>
+                        <input formControlName="username" id="telcel_username" matInput autocomplete="false" />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Password</mat-label>
+                        <input formControlName="password" id="telcel_password" type="password" matInput />
+                    </mat-form-field>
+                    <mat-form-field class="col-md-4">
+                        <mat-label>Rol</mat-label>
+                        <mat-select formControlName="idRol" id="rol">
+                            <mat-option [value]="rol.id" *ngFor="let rol of rolList">{{rol.value}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <mat-checkbox class='col-md-1' formControlName='enabled'>Habilitado</mat-checkbox>
+
+                    <button mat-button mat-raised-button color="primary" type="submit" id="submit"
+                        [disabled]="registerForm.invalid">
+                        Crear
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

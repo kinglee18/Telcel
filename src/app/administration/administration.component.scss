@@ -1,0 +1,23 @@
+.kt-header__brand {
+  background-color: white;
+}
+
+.kt-menu__nav {
+  li.active i {
+    color: #22b9ff !important;
+  }
+}
+
+mat-option:hover span {
+  color: red;
+  display: inline;
+  right: 0;
+}
+
+mat-option span {
+  display: none;
+}
+
+#kt_header_brand {
+  margin-left: 16px;
+}

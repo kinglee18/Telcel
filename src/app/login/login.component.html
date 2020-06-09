@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex justify-content-center mb-4" id="logo">
+      <img src="../assets/telcel.svg" alt="" />
+    </div>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input (change)="clearErrorMessage()" id="email" matInput formControlName="email" />
+      <mat-error *ngIf="loginForm.get('email').hasError('email')">
+        Email no es válido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" (change)="clearErrorMessage()" id="password" matInput formControlName="password" />
+    </mat-form-field>
+    <button
+      mat-button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      id="submit"
+      [disabled]="loginForm.invalid"
+    >
+      Ingresar
+    </button>
+    <mat-error *ngIf="loginError">
+      Email ó contraseña no son válidos
+    </mat-error>
+  </form>
+</div>

@@ -1,0 +1,15 @@
+table {
+ 
+   
+  tr > td:nth-child(3) {
+    width: 50%;
+  }
+  tr > td:nth-child(4) {
+    text-align-last: right;
+  }
+}
+
+#table-container {
+  overflow: auto;
+  height: 400px;
+}
